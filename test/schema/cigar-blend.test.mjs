@@ -34,3 +34,69 @@ test('uses an explicitly synthetic variant and vitola for blend validation', asy
 test('rejects a variant blend override without evidence', async () => {
   assert.equal(validate(await readFrontmatter('test/fixtures/cigar/invalid-override-without-evidence.md')), false);
 });
+
+test('rejects a filler component in the wrapper array', () => {
+  const value = {
+    schemaVersion: 1,
+    id: 'wrapper-role-mismatch',
+    brand: 'synthetic-brand',
+    line: 'synthetic-line',
+    name: 'Wrapper Role Mismatch',
+    blend: {
+      wrapper: [{ rawLabel: 'Synthetic filler leaf', role: 'filler' }],
+      binder: [{ rawLabel: 'Synthetic binder leaf', role: 'binder' }],
+      filler: [{ rawLabel: 'Synthetic filler leaf', role: 'filler' }],
+    },
+    variants: [{
+      id: 'wrapper-role-mismatch-robusto',
+      name: 'Robusto',
+      vitola: { commercialName: 'Robusto' },
+    }],
+  };
+
+  assert.equal(validate(value), false);
+});
+
+test('rejects a wrapper component in the binder array', () => {
+  const value = {
+    schemaVersion: 1,
+    id: 'binder-role-mismatch',
+    brand: 'synthetic-brand',
+    line: 'synthetic-line',
+    name: 'Binder Role Mismatch',
+    blend: {
+      wrapper: [{ rawLabel: 'Synthetic wrapper leaf', role: 'wrapper' }],
+      binder: [{ rawLabel: 'Synthetic wrapper leaf', role: 'wrapper' }],
+      filler: [{ rawLabel: 'Synthetic filler leaf', role: 'filler' }],
+    },
+    variants: [{
+      id: 'binder-role-mismatch-robusto',
+      name: 'Robusto',
+      vitola: { commercialName: 'Robusto' },
+    }],
+  };
+
+  assert.equal(validate(value), false);
+});
+
+test('rejects a binder component in the filler array', () => {
+  const value = {
+    schemaVersion: 1,
+    id: 'filler-role-mismatch',
+    brand: 'synthetic-brand',
+    line: 'synthetic-line',
+    name: 'Filler Role Mismatch',
+    blend: {
+      wrapper: [{ rawLabel: 'Synthetic wrapper leaf', role: 'wrapper' }],
+      binder: [{ rawLabel: 'Synthetic binder leaf', role: 'binder' }],
+      filler: [{ rawLabel: 'Synthetic binder leaf', role: 'binder' }],
+    },
+    variants: [{
+      id: 'filler-role-mismatch-robusto',
+      name: 'Robusto',
+      vitola: { commercialName: 'Robusto' },
+    }],
+  };
+
+  assert.equal(validate(value), false);
+});

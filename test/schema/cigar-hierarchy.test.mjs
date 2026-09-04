@@ -25,3 +25,34 @@ test('does not derive dimensions from the commercial name', async () => {
   assert.equal(value.variants[0].vitola.ringGauge, null);
   assert.equal(validate(value), true);
 });
+
+test('allows evidence attached directly to a cigar', () => {
+  const value = {
+    schemaVersion: 1,
+    id: 'evidenced-synthetic-cigar',
+    brand: 'synthetic-brand',
+    line: 'synthetic-line',
+    name: 'Evidenced Synthetic Cigar',
+    evidence: [
+      {
+        sourceId: 'synthetic-source',
+        field: '/name',
+        relation: 'supports',
+        confidence: 'high',
+        claimType: 'fact',
+        status: 'supported',
+      },
+    ],
+    variants: [
+      {
+        id: 'evidenced-synthetic-robusto',
+        name: 'Robusto',
+        vitola: {
+          commercialName: 'Robusto',
+        },
+      },
+    ],
+  };
+
+  assert.equal(validate(value), true, ajv.errorsText(validate.errors));
+});

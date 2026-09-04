@@ -21,6 +21,11 @@ properties:
   name:
     type: string
     minLength: 1
+  evidence:
+    type: array
+    minItems: 1
+    items:
+      $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/evidenceRef
   blend:
     anyOf:
       - $ref: '#/$defs/blend'
@@ -145,17 +150,32 @@ $defs:
         type: array
         minItems: 1
         items:
-          $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/tobaccoComponent
+          allOf:
+            - $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/tobaccoComponent
+            - type: object
+              properties:
+                role:
+                  const: wrapper
       binder:
         type: array
         minItems: 1
         items:
-          $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/tobaccoComponent
+          allOf:
+            - $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/tobaccoComponent
+            - type: object
+              properties:
+                role:
+                  const: binder
       filler:
         type: array
         minItems: 1
         items:
-          $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/tobaccoComponent
+          allOf:
+            - $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/tobaccoComponent
+            - type: object
+              properties:
+                role:
+                  const: filler
   blendOverride:
     type: object
     required:
