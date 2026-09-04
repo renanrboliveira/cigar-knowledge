@@ -1,0 +1,71 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://cigar-knowledge.local/schema/cigar.schema.yaml
+type: object
+required:
+  - schemaVersion
+  - id
+  - brand
+  - line
+  - name
+  - variants
+additionalProperties: false
+properties:
+  schemaVersion:
+    $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/schemaVersion
+  id:
+    $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/slug
+  brand:
+    $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/slug
+  line:
+    $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/slug
+  name:
+    type: string
+    minLength: 1
+  variants:
+    type: array
+    minItems: 1
+    items:
+      $ref: '#/$defs/cigarVariant'
+$defs:
+  cigarVariant:
+    type: object
+    required:
+      - id
+      - name
+      - vitola
+    additionalProperties: false
+    properties:
+      id:
+        $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/slug
+      name:
+        type: string
+        minLength: 1
+      vitola:
+        $ref: '#/$defs/vitola'
+  vitola:
+    type: object
+    required:
+      - commercialName
+    additionalProperties: false
+    properties:
+      commercialName:
+        type: string
+        minLength: 1
+      factoryName:
+        type:
+          - string
+          - 'null'
+      shape:
+        type:
+          - string
+          - 'null'
+      lengthMm:
+        anyOf:
+          - type: number
+            exclusiveMinimum: 0
+          - type: 'null'
+      ringGauge:
+        anyOf:
+          - type: integer
+            exclusiveMinimum: 0
+          - type: 'null'
