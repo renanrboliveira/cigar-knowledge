@@ -117,3 +117,81 @@ $defs:
               - final_third
           - type: string
             pattern: ^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$
+      sensory:
+        $ref: '#/$defs/sensorySnapshot'
+      retrohale:
+        $ref: '#/$defs/retrohale'
+  sensorySnapshot:
+    type: object
+    additionalProperties: false
+    properties:
+      strength:
+        anyOf:
+          - type: integer
+            minimum: 1
+            maximum: 5
+          - type: 'null'
+      body:
+        anyOf:
+          - type: integer
+            minimum: 1
+            maximum: 5
+          - type: 'null'
+      flavorIntensity:
+        anyOf:
+          - type: integer
+            minimum: 1
+            maximum: 5
+          - type: 'null'
+      texture:
+        type:
+          - string
+          - 'null'
+      flavors:
+        type: array
+        items:
+          $ref: '#/$defs/flavorObservation'
+      notes:
+        type: string
+  flavorObservation:
+    type: object
+    required:
+      - family
+    additionalProperties: false
+    properties:
+      family:
+        type: string
+        enum:
+          - woody
+          - earthy
+          - roasted
+          - sweet
+          - spicy
+          - nutty
+          - creamy
+          - fruity
+          - vegetal
+          - floral
+          - leather
+          - mineral
+      descriptor:
+        type: string
+      intensity:
+        type: integer
+        minimum: 1
+        maximum: 5
+      discovery:
+        type: string
+        enum:
+          - spontaneous
+          - prompted
+  retrohale:
+    type: object
+    additionalProperties: false
+    properties:
+      flavors:
+        type: array
+        items:
+          $ref: '#/$defs/flavorObservation'
+      notes:
+        type: string

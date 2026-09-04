@@ -1,0 +1,26 @@
+---
+schemaVersion: 1
+id: sensory-valid-session
+cigarVariantId: synthetic-robusto-54
+mode: guided
+status: completed
+stages:
+  - kind: first_third
+    sensory:
+      strength: 2
+      body: 4
+      flavorIntensity: 3
+      flavors:
+        - family: woody
+          descriptor: cedar
+          intensity: 3
+          discovery: spontaneous
+    retrohale:
+      flavors:
+        - family: spicy
+          descriptor: white pepper
+          intensity: 4
+          discovery: prompted
+---
+
+# Sensory session
