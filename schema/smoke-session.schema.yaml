@@ -1,0 +1,117 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://cigar-knowledge.local/schema/smoke-session.schema.yaml
+type: object
+required:
+  - schemaVersion
+  - id
+  - cigarVariantId
+  - mode
+  - status
+additionalProperties: false
+properties:
+  schemaVersion:
+    $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/schemaVersion
+  id:
+    $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/slug
+  cigarVariantId:
+    $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/slug
+  mode:
+    type: string
+    enum:
+      - quick
+      - guided
+  status:
+    type: string
+    enum:
+      - planned
+      - in_progress
+      - completed
+      - abandoned
+  startedAt:
+    type:
+      - string
+      - 'null'
+  endedAt:
+    type:
+      - string
+      - 'null'
+  durationMinutes:
+    type:
+      - number
+      - 'null'
+    minimum: 0
+  context:
+    $ref: '#/$defs/context'
+  preparation:
+    $ref: '#/$defs/preparation'
+  preLight:
+    $ref: '#/$defs/preLight'
+  stages:
+    type: array
+    items:
+      $ref: '#/$defs/stage'
+allOf:
+  - if:
+      properties:
+        status:
+          const: completed
+      required:
+        - status
+    then:
+      properties:
+        stages: true
+      required:
+        - stages
+$defs:
+  context:
+    type: object
+    additionalProperties: false
+    properties:
+      location:
+        type: string
+      occasion:
+        type: string
+      companions:
+        type: string
+      notes:
+        type: string
+  preparation:
+    type: object
+    additionalProperties: false
+    properties:
+      cutter:
+        type: string
+      cut:
+        type: string
+      lightingMethod:
+        type: string
+      restedBeforeLighting:
+        type: boolean
+      notes:
+        type: string
+  preLight:
+    type: object
+    additionalProperties: false
+    properties:
+      appearance:
+        type: string
+      aroma:
+        type: string
+      coldDraw:
+        type: string
+      notes:
+        type: string
+  stage:
+    type: object
+    required:
+      - kind
+    additionalProperties: false
+    properties:
+      kind:
+        anyOf:
+          - enum:
+              - first_third
+              - second_third
+              - final_third
+          - type: string
+            pattern: ^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$
