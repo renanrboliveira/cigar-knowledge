@@ -23,3 +23,17 @@ test('accepts a manufacturer source and rejects global confidence', async () => 
     false,
   );
 });
+
+test('accepts a specialized-media source', async () => {
+  const common = YAML.parse(await readFile('schema/common.schema.yaml', 'utf8'));
+  const source = YAML.parse(await readFile('schema/source.schema.yaml', 'utf8'));
+  const ajv = new Ajv2020({ allErrors: true, strict: true });
+  addFormats(ajv);
+  ajv.addSchema(common);
+  const validate = ajv.compile(source);
+
+  assert.equal(
+    validate(await readFrontmatter('sources/specialized-media/example-specialized-media-source.md')),
+    true,
+  );
+});

@@ -13,7 +13,7 @@ evidence:
     field: /production/status
     relation: contradicts
     confidence: medium
-    claimType: expert_consensus
+    claimType: fact
     status: disputed
     rawLabel: Limited release
     note: A specialized-media report identifies the cigar as a limited release.

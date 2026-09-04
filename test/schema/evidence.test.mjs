@@ -15,6 +15,7 @@ test('keeps contradictory evidence records side by side', async () => {
   const document = await readFrontmatter('examples/evidence-disagreement.example.md');
   assert.equal(validate(document), true, ajv.errorsText(validate.errors));
   assert.deepEqual(document.evidence.map(({ relation }) => relation), ['supports', 'contradicts']);
+  assert.deepEqual(document.evidence.map(({ claimType }) => claimType), ['manufacturer_claim', 'fact']);
 });
 
 test('rejects evidence without a source and field', () => {
