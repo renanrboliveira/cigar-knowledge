@@ -38,7 +38,7 @@ mexicanSanAndresMaduro:
   role: wrapper
   origin:
     countryCode: MX
-    region: San Andrés
+    region: null
     subregion: null
     farm: null
   processing:

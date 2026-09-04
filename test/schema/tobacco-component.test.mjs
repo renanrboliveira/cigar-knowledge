@@ -46,11 +46,15 @@ test('preserves and decomposes Ecuadorian Connecticut Shade', () => {
 });
 
 test('allows Mexican San Andrés Maduro and an origin-only Nicaraguan component', () => {
-  assert.equal(
-    validateComponent(fixtures.mexicanSanAndresMaduro),
-    true,
-    ajv.errorsText(validateComponent.errors),
-  );
+  const component = fixtures.mexicanSanAndresMaduro;
+
+  assert.equal(validateComponent(component), true, ajv.errorsText(validateComponent.errors));
+  assert.equal(component.rawLabel, 'Mexican San Andrés Maduro');
+  assert.equal(component.tobaccoId, 'san-andres');
+  assert.equal(component.origin.countryCode, 'MX');
+  assert.equal(component.origin.region, null);
+  assert.deepEqual(component.processing, ['maduro']);
+
   assert.equal(
     validateComponent(fixtures.nicaraguanOnly),
     true,

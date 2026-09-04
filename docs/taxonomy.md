@@ -33,7 +33,7 @@ decomposition.
 
 | Raw label | Identity | Origin | Genetics | Cultivation | Processing | Descriptor / color | Priming | Crop | Role |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Mexican San Andrés Maduro | San Andrés | countryCode: `MX`; region: San Andrés | Unknown | Unknown | `maduro` | Unknown | Unknown | Unknown | Component-specific; not implied by the identity |
+| Mexican San Andrés Maduro | San Andrés | countryCode: `MX` | Unknown | Unknown | `maduro` | Unknown | Unknown | Unknown | Component-specific; not implied by the identity |
 
 ### Ligero
 
