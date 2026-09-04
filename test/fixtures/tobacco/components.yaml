@@ -1,0 +1,55 @@
+mataFinaByRole:
+  - tobaccoId: mata-fina
+    rawLabel: Mata Fina
+    role: wrapper
+  - tobaccoId: mata-fina
+    rawLabel: Mata Fina
+    role: binder
+  - tobaccoId: mata-fina
+    rawLabel: Mata Fina
+    role: filler
+
+ligeroAsPriming:
+  tobaccoId: corojo
+  rawLabel: Corojo Ligero
+  role: filler
+  priming: ligero
+
+ligeroAsIdentity:
+  tobaccoId: ligero
+  rawLabel: Ligero
+  role: filler
+
+ecuadorianConnecticutShade:
+  tobaccoId: connecticut-shade
+  rawLabel: Ecuadorian Connecticut Shade
+  role: wrapper
+  origin:
+    countryCode: EC
+    region: null
+    subregion: null
+    farm: null
+  cultivation:
+    method: shade
+
+mexicanSanAndresMaduro:
+  tobaccoId: san-andres
+  rawLabel: Mexican San Andrés Maduro
+  role: wrapper
+  origin:
+    countryCode: MX
+    region: San Andrés
+    subregion: null
+    farm: null
+  processing:
+    - maduro
+
+nicaraguanOnly:
+  tobaccoId: null
+  rawLabel: Nicaraguan
+  role: filler
+  origin:
+    countryCode: NI
+    region: null
+    subregion: null
+    farm: null

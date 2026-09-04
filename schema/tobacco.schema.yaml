@@ -108,3 +108,65 @@ $defs:
         type: string
       note:
         type: string
+  tobaccoComponent:
+    type: object
+    required:
+      - rawLabel
+      - role
+    additionalProperties: false
+    properties:
+      tobaccoId:
+        allOf:
+          - anyOf:
+              - $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/slug
+              - type: 'null'
+          - not:
+              const: ligero
+      rawLabel:
+        type: string
+        minLength: 1
+      role:
+        type: string
+        enum:
+          - wrapper
+          - binder
+          - filler
+      origin:
+        anyOf:
+          - $ref: '#/$defs/origin'
+          - type: 'null'
+      genetics:
+        anyOf:
+          - $ref: '#/$defs/genetics'
+          - type: 'null'
+      cultivation:
+        type: object
+        additionalProperties: false
+        properties:
+          method:
+            type:
+              - string
+              - 'null'
+      processing:
+        type: array
+        minItems: 1
+        items:
+          type: string
+          minLength: 1
+      descriptor:
+        type:
+          - string
+          - 'null'
+      priming:
+        type:
+          - string
+          - 'null'
+      crop:
+        type:
+          - string
+          - 'null'
+      evidence:
+        type: array
+        minItems: 1
+        items:
+          $ref: '#/$defs/evidenceRef'
