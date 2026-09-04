@@ -21,3 +21,14 @@ test('supports guided thirds without hard-coding array length', async () => {
   assert.equal(validate(value), true, ajv.errorsText(validate.errors));
   assert.deepEqual(value.stages.map(({ kind }) => kind), ['first_third', 'second_third', 'final_third']);
 });
+
+test('rejects a completed session with no stages', () => {
+  assert.equal(validate({
+    schemaVersion: 1,
+    id: 'completed-without-stages',
+    cigarVariantId: 'synthetic-robusto-54',
+    mode: 'quick',
+    status: 'completed',
+    stages: [],
+  }), false);
+});

@@ -59,7 +59,9 @@ allOf:
         - status
     then:
       properties:
-        stages: true
+        stages:
+          type: array
+          minItems: 1
       required:
         - stages
 $defs:
