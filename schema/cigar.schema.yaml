@@ -21,6 +21,10 @@ properties:
   name:
     type: string
     minLength: 1
+  blend:
+    anyOf:
+      - $ref: '#/$defs/blend'
+      - type: 'null'
   variants:
     type: array
     minItems: 1
@@ -42,6 +46,45 @@ $defs:
         minLength: 1
       vitola:
         $ref: '#/$defs/vitola'
+      blendOverride:
+        $ref: '#/$defs/blendOverride'
+  blend:
+    type: object
+    required:
+      - wrapper
+      - binder
+      - filler
+    additionalProperties: false
+    properties:
+      wrapper:
+        type: array
+        minItems: 1
+        items:
+          $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/tobaccoComponent
+      binder:
+        type: array
+        minItems: 1
+        items:
+          $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/tobaccoComponent
+      filler:
+        type: array
+        minItems: 1
+        items:
+          $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/tobaccoComponent
+  blendOverride:
+    type: object
+    required:
+      - blend
+      - evidence
+    additionalProperties: false
+    properties:
+      blend:
+        $ref: '#/$defs/blend'
+      evidence:
+        type: array
+        minItems: 1
+        items:
+          $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/evidenceRef
   vitola:
     type: object
     required:

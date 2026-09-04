@@ -6,9 +6,11 @@ import YAML from 'yaml';
 import { readFrontmatter } from '../../scripts/lib/frontmatter.mjs';
 
 const common = YAML.parse(await readFile('schema/common.schema.yaml', 'utf8'));
+const tobacco = YAML.parse(await readFile('schema/tobacco.schema.yaml', 'utf8'));
 const cigar = YAML.parse(await readFile('schema/cigar.schema.yaml', 'utf8'));
 const ajv = new Ajv2020({ allErrors: true, strict: true });
 ajv.addSchema(common);
+ajv.addSchema(tobacco);
 const validate = ajv.compile(cigar);
 
 test('requires a smokeable variant with an explicit vitola', async () => {
