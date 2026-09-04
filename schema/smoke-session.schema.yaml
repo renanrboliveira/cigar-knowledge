@@ -46,10 +46,14 @@ properties:
     $ref: '#/$defs/preparation'
   preLight:
     $ref: '#/$defs/preLight'
+  nicotineImpact:
+    $ref: '#/$defs/nicotineImpact'
   stages:
     type: array
     items:
       $ref: '#/$defs/stage'
+  finalEvaluation:
+    $ref: '#/$defs/finalEvaluation'
 allOf:
   - if:
       properties:
@@ -121,6 +125,8 @@ $defs:
         $ref: '#/$defs/sensorySnapshot'
       retrohale:
         $ref: '#/$defs/retrohale'
+      construction:
+        $ref: '#/$defs/construction'
   sensorySnapshot:
     type: object
     additionalProperties: false
@@ -195,3 +201,98 @@ $defs:
           $ref: '#/$defs/flavorObservation'
       notes:
         type: string
+  construction:
+    type: object
+    additionalProperties: false
+    properties:
+      draw:
+        type: string
+        enum:
+          - very_tight
+          - tight
+          - ideal
+          - open
+          - very_open
+      burnQuality:
+        type:
+          - string
+          - 'null'
+      events:
+        type: array
+        items:
+          type: string
+          enum:
+            - touch_up
+            - relight
+            - canoeing
+            - tunneling
+      smokeOutput:
+        type:
+          - string
+          - 'null'
+      perceivedHeat:
+        type:
+          - string
+          - 'null'
+  nicotineImpact:
+    type: string
+    enum:
+      - none
+      - light
+      - noticeable
+      - strong
+      - excessive
+  finalEvaluation:
+    type: object
+    additionalProperties: false
+    properties:
+      enjoyment:
+        $ref: '#/$defs/nullableRating'
+      balance:
+        $ref: '#/$defs/nullableRating'
+      complexity:
+        $ref: '#/$defs/nullableRating'
+      evolution:
+        $ref: '#/$defs/nullableRating'
+      construction:
+        $ref: '#/$defs/nullableRating'
+      bestStage:
+        type:
+          - string
+          - 'null'
+      wouldSmokeAgain:
+        type:
+          - boolean
+          - 'null'
+      wouldBuyAgain:
+        type:
+          - boolean
+          - 'null'
+      dominantFlavorFamilies:
+        type: array
+        uniqueItems: true
+        items:
+          type: string
+          enum:
+            - woody
+            - earthy
+            - roasted
+            - sweet
+            - spicy
+            - nutty
+            - creamy
+            - fruity
+            - vegetal
+            - floral
+            - leather
+            - mineral
+      overallImpression:
+        type:
+          - string
+          - 'null'
+  nullableRating:
+    type:
+      - integer
+      - 'null'
+    minimum: 1
+    maximum: 5
