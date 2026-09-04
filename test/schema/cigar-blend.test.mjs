@@ -23,6 +23,14 @@ test('allows the same Tobacco identity in wrapper, binder, and filler', async ()
   ], ['mata-fina', 'mata-fina', 'mata-fina']);
 });
 
+test('uses an explicitly synthetic variant and vitola for blend validation', async () => {
+  const value = await readFrontmatter('test/fixtures/cigar/dona-flor-puro-mata-fina.md');
+
+  assert.equal(value.variants[0].id, 'synthetic-validation-vitola');
+  assert.equal(value.variants[0].name, 'Synthetic Validation Vitola');
+  assert.equal(value.variants[0].vitola.commercialName, 'Synthetic Validation Vitola');
+});
+
 test('rejects a variant blend override without evidence', async () => {
   assert.equal(validate(await readFrontmatter('test/fixtures/cigar/invalid-override-without-evidence.md')), false);
 });

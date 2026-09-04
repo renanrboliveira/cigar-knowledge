@@ -39,10 +39,10 @@ blend:
           claimType: manufacturer_claim
           status: supported
 variants:
-  - id: dona-flor-puro-mata-fina-robusto
-    name: Robusto
+  - id: synthetic-validation-vitola
+    name: Synthetic Validation Vitola
     vitola:
-      commercialName: Robusto
+      commercialName: Synthetic Validation Vitola
 ---
 
 # Dona Flor Puro Mata Fina
