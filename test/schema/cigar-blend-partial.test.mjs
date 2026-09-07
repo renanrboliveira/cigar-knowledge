@@ -23,7 +23,7 @@ test('aceita blend com papel desconhecido', async () => {
 test('continua aceitando blend completo', async () => {
   const validate = await compileCigar();
   assert.equal(
-    validate(await readFrontmatter('test/fixtures/cigar/dona-flor-puro-mata-fina.md')),
+    validate(await readFrontmatter('test/fixtures/cigar/fixture-brand-puro-mata-fina.md')),
     true,
   );
 });

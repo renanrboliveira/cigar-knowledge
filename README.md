@@ -12,7 +12,11 @@ validation.
   including concepts, terroirs, brands, and sensory material.
 - `knowledge/cigars/` — catálogo: marca, linha, edição, variantes e blend, com
   evidência por campo.
-- `knowledge/lines/` — identidade e história de cada linha.
+- `knowledge/lines/` — identidade e história de cada linha. As histórias de
+  linha vieram sem procedência: a origem do catálogo não registrava fonte para
+  elas, e a base não inventa uma. Nenhum documento em `knowledge/lines/` tem
+  `evidence`, e isso é conhecido, não um esquecimento — a prosa de fabricante
+  ali não está sustentada por fonte alguma.
 - `knowledge/editorial/` — dossiê editorial por variante, com fonte obrigatória.
 - `personal/` — private cellar records, learning notes, comparisons, and future
   smoke sessions; these observations do not establish catalog facts.

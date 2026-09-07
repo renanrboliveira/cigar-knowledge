@@ -1,9 +1,9 @@
 ---
 schemaVersion: 1
-id: dona-flor-puro-mata-fina
-brand: dona-flor
+id: fixture-brand-puro-mata-fina
+brand: fixture-brand
 line: puro-mata-fina
-name: Dona Flor Puro Mata Fina
+name: Fixture Brand Puro Mata Fina
 blend:
   wrapper:
     - tobaccoId: mata-fina
@@ -45,6 +45,9 @@ variants:
       commercialName: Synthetic Validation Vitola
 ---
 
-# Dona Flor Puro Mata Fina
+# Fixture Brand Puro Mata Fina
 
 Schema fixture for a documented same-identity blend across all cigar roles.
+A marca e sintetica de proposito: a fixture nao tem fonte para o blend que
+declara, e atribui-lo a uma marca real seria afirmar sobre um produto que
+existe.

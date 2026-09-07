@@ -14,7 +14,7 @@ ajv.addSchema(tobacco);
 const validate = ajv.compile(cigar);
 
 test('allows the same Tobacco identity in wrapper, binder, and filler', async () => {
-  const value = await readFrontmatter('test/fixtures/cigar/dona-flor-puro-mata-fina.md');
+  const value = await readFrontmatter('test/fixtures/cigar/fixture-brand-puro-mata-fina.md');
   assert.equal(validate(value), true, ajv.errorsText(validate.errors));
   assert.deepEqual([
     value.blend.wrapper[0].tobaccoId,
@@ -24,7 +24,7 @@ test('allows the same Tobacco identity in wrapper, binder, and filler', async ()
 });
 
 test('uses an explicitly synthetic variant and vitola for blend validation', async () => {
-  const value = await readFrontmatter('test/fixtures/cigar/dona-flor-puro-mata-fina.md');
+  const value = await readFrontmatter('test/fixtures/cigar/fixture-brand-puro-mata-fina.md');
 
   assert.equal(value.variants[0].id, 'synthetic-validation-vitola');
   assert.equal(value.variants[0].name, 'Synthetic Validation Vitola');
