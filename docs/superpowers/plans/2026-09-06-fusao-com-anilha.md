@@ -1353,10 +1353,11 @@ const status=new Set(docs.map(d=>d.release.productionStatus));
 console.log('productionStatus distintos:',[...status].join(',') , status.size===1&&status.has('unknown')?'OK':'DIVERGIU');
 "
 ```
-Expected: `papeis de blend no banco: 81 | na base: 81 OK` e
-`productionStatus distintos: unknown OK`. O total de 81 sai de 25 variantes com
-os três papéis, 11 parciais e 10 sem nenhum; se a sua contagem der outro
-número, confira o dump antes de suspeitar do mapeador.
+Expected: `papeis de blend no banco: 86 | na base: 86 OK` e
+`productionStatus distintos: unknown OK`. O total de 86 foi medido no banco em
+2026-09-07 e se decompõe assim: 25 variantes com os três papéis (75), mais 11
+variantes parciais com exatamente um papel cada (11), mais 10 sem nenhum. Se a
+sua contagem der outro número, confira o dump antes de suspeitar do mapeador.
 
 - [ ] **Step 6: Check referential integrity by hand**
 
