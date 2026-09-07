@@ -137,3 +137,98 @@ test('render produz frontmatter delimitado e corpo abaixo', () => {
   assert.match(markdown, /^---\n/);
   assert.match(markdown, /\n---\n\n# Oliva\n/);
 });
+
+// Duas variantes da mesma edicao com blends diferentes. A fixture principal
+// nao tem esse caso (so ha uma edicao com blend divergente no catalogo real,
+// e ela nao esta na fixture pequena), entao ele e montado aqui.
+const releaseDivergente = {
+  brand_slug: 'oliva',
+  brand_name: 'Oliva',
+  line_slug: 'serie-o',
+  line_name: 'Serie O',
+  slug: 'padrao',
+  name: null,
+  is_default: true,
+  release_year: null,
+};
+
+const variantesDivergentes = [
+  {
+    brand_slug: 'oliva',
+    line_slug: 'serie-o',
+    release_slug: 'padrao',
+    slug: 'robusto',
+    vitola: 'Robusto',
+    length_mm: 127,
+    ring_gauge: 50,
+    wrapper: 'Ecuador Habano',
+    binder: 'Nicaragua',
+    filler: 'Nicaragua',
+    strength: null,
+    official_body: null,
+    official_flavor_intensity: null,
+  },
+  {
+    brand_slug: 'oliva',
+    line_slug: 'serie-o',
+    release_slug: 'padrao',
+    slug: 'toro',
+    vitola: 'Toro',
+    length_mm: 152,
+    ring_gauge: 54,
+    wrapper: 'Cameroon',
+    binder: 'Nicaragua',
+    filler: 'Nicaragua',
+    strength: null,
+    official_body: null,
+    official_flavor_intensity: null,
+  },
+];
+
+test('blend divergente sem proveniencia faz mapCigar lancar, em vez de emitir override vazio', () => {
+  assert.throws(
+    () => mapCigar(releaseDivergente, variantesDivergentes, []),
+    /oliva-serie-o-robusto/,
+  );
+});
+
+test('blend divergente com proveniencia produz blendOverride valido para cada variante', () => {
+  const provenanceDivergente = [
+    {
+      brand_slug: 'oliva',
+      line_slug: 'serie-o',
+      release_slug: 'padrao',
+      variant_slug: 'robusto',
+      field: 'wrapper',
+      confidence: 'confirmada',
+      source_name: 'Oliva Cigars - Serie O',
+      source_url: 'https://olivacigar.com/cigars/serie-o/',
+      consulted_at: '2026-08-26',
+    },
+    {
+      brand_slug: 'oliva',
+      line_slug: 'serie-o',
+      release_slug: 'padrao',
+      variant_slug: 'toro',
+      field: 'wrapper',
+      confidence: 'confirmada',
+      source_name: 'Oliva Cigars - Serie O',
+      source_url: 'https://olivacigar.com/cigars/serie-o/',
+      consulted_at: '2026-08-26',
+    },
+  ];
+
+  const { frontmatter } = mapCigar(releaseDivergente, variantesDivergentes, provenanceDivergente);
+
+  // regra do julgamento do coordenador: quando divergem, nao ha blend de
+  // charuto verdadeiro para todas as variantes, entao cigar.blend fica
+  // ausente e TODA variante (nao so a que diverge) leva blendOverride.
+  assert.equal('blend' in frontmatter, false);
+  assert.equal(frontmatter.variants.length, 2);
+  assert.ok(frontmatter.variants[0].blendOverride);
+  assert.ok(frontmatter.variants[1].blendOverride);
+  assert.equal(frontmatter.variants[0].blendOverride.blend.wrapper[0].rawLabel, 'Ecuador Habano');
+  assert.equal(frontmatter.variants[1].blendOverride.blend.wrapper[0].rawLabel, 'Cameroon');
+  assert.ok(frontmatter.variants[0].blendOverride.evidence.length > 0);
+  assert.ok(frontmatter.variants[1].blendOverride.evidence.length > 0);
+});

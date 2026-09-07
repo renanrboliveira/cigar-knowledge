@@ -8,7 +8,7 @@ import YAML from 'yaml';
 const slugify = (texto) =>
   texto
     .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '') // marcas combinantes, escapadas de proposito
+    .replace(/[\u0300-\u036f]/g, '') // marcas combinantes: escape numerico de 4 digitos, nunca caractere literal
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
@@ -124,13 +124,46 @@ const blendDe = (variant, provenance) => ({
 const nomeDoCharuto = (r) =>
   r.is_default ? `${r.brand_name} ${r.line_name}` : `${r.brand_name} ${r.line_name} ${r.name}`;
 
+// `blendOverride` so entra quando o blend da variante diverge do resto da
+// edicao. O schema exige `evidence` nao vazio junto do blend substituto
+// (docs/architecture.md: "A variant may use blendOverride only when it
+// includes a complete replacement blend and a nonempty field-level evidence
+// list"), porque sem fonte por tras o override seria um blend por tamanho
+// inferido de nome, listagem de loja ou impressao de fumada - exatamente o
+// que a regra 1 (nunca inventar blend) proibe. Por isso a falha e barulhenta:
+// silenciar o override perderia blend real do banco, e emiti-lo sem
+// evidencia geraria um documento que o schema recusa (ou que mente, se o
+// schema um dia relaxar). Melhor parar aqui e virar decisao humana.
+function blendOverrideDe(variant, chave, provenance) {
+  const evidence = provenance
+    .filter(
+      (p) =>
+        p.variant_slug === variant.slug &&
+        p.line_slug === variant.line_slug &&
+        ['wrapper', 'binder', 'filler'].includes(p.field),
+    )
+    .map((p) => evidenceFrom(p.confidence, sourceId(p.source_name), PONTEIRO[p.field]));
+
+  if (evidence.length === 0) {
+    throw new Error(
+      `blend divergente sem proveniencia para a variante ${variantId({ ...chave, variant: variant.slug })}: ` +
+        'blendOverride exige evidencia, e nao pode ser inventada nem omitida em silencio',
+    );
+  }
+
+  return { blend: blendDe(variant, provenance), evidence };
+}
+
 export function mapCigar(release, variants, provenance) {
   const chave = { brand: release.brand_slug, line: release.line_slug, release: release.slug };
   const id = cigarId(chave);
 
   // O Anilha guarda blend por variante; a KB guarda no charuto. Quando todas as
-  // variantes da edicao concordam, o blend sobe. Quando divergem, a variante
-  // divergente recebe blendOverride, que a KB so aceita com evidencia junto.
+  // variantes da edicao concordam, o blend sobe para cigar.blend. Quando
+  // divergem, nao existe blend de charuto que seja verdade para todas -
+  // declarar o da maioria seria afirmar o que a fonte nao diz. Por isso
+  // cigar.blend fica ausente e TODA variante (nao so a que diverge) recebe
+  // blendOverride, cada uma com o proprio blend e evidencia.
   const assinaturas = new Set(variants.map(assinaturaDoBlend));
   const compartilhado = assinaturas.size === 1;
   const semBlendNenhum = compartilhado && assinaturaDoBlend(variants[0]) === '~|~|~';
@@ -165,22 +198,7 @@ export function mapCigar(release, variants, provenance) {
             lengthMm: v.length_mm,
             ringGauge: v.ring_gauge,
           }),
-          blendOverride: compartilhado
-            ? undefined
-            : {
-                blend: blendDe(v, provenance),
-                // So evidencia de blend entra aqui. `strength` tem ponteiro
-                // para /declaredProfile e apontaria para fora do que o
-                // blendOverride afirma.
-                evidence: provenance
-                  .filter(
-                    (p) =>
-                      p.variant_slug === v.slug &&
-                      p.line_slug === v.line_slug &&
-                      ['wrapper', 'binder', 'filler'].includes(p.field),
-                  )
-                  .map((p) => evidenceFrom(p.confidence, sourceId(p.source_name), PONTEIRO[p.field])),
-              },
+          blendOverride: compartilhado ? undefined : blendOverrideDe(v, chave, provenance),
         }),
       ),
     }),
