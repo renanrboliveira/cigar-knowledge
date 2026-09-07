@@ -13,7 +13,25 @@ const slugify = (texto) =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
 
-export const sourceId = (name) => slugify(name);
+// A identidade de uma fonte web e a URL, nao o titulo: o Anilha reusa titulo
+// para paginas diferentes ("Oliva Cigars - catalogo oficial" cobre tres URLs
+// de linha distintas) e varia o titulo para a mesma pagina ("Habanos - Romeo
+// y Julieta" e "...Romeo y Julieta Brand"). Um id derivado do titulo faria o
+// dedup por nome descartar URLs diferentes em silencio, e a evidencia
+// sobrevivente citaria a pagina errada - pior que nao citar nenhuma. Com URL,
+// o id vem do host+caminho; sem URL, cai para o slug do nome.
+export function sourceId(name, url) {
+  if (url) {
+    try {
+      const u = new URL(url);
+      const host = u.hostname.replace(/^www\./, '');
+      return slugify(`${host}${u.pathname}`);
+    } catch {
+      // URL invalida: nao inventa identidade de host, cai para o nome.
+    }
+  }
+  return slugify(name);
+}
 
 export function cigarId({ brand, line, release }) {
   return release === 'padrao' ? `${brand}-${line}` : `${brand}-${line}-${release}`;
@@ -48,7 +66,7 @@ const semNulos = (objeto) =>
 
 export function mapBrand(row) {
   const evidence = row.story_source_name
-    ? [evidenceFrom('confirmada', sourceId(row.story_source_name), '/story')]
+    ? [evidenceFrom('confirmada', sourceId(row.story_source_name, row.story_source_url), '/story')]
     : undefined;
 
   return {
@@ -106,7 +124,7 @@ function componentesDe(variant, provenance, papel) {
       rawLabel,
       role: papel,
       evidence: fontes.length
-        ? fontes.map((p) => evidenceFrom(p.confidence, sourceId(p.source_name), PONTEIRO[papel]))
+        ? fontes.map((p) => evidenceFrom(p.confidence, sourceId(p.source_name, p.source_url), PONTEIRO[papel]))
         : undefined,
     }),
   ];
@@ -142,7 +160,7 @@ function blendOverrideDe(variant, chave, provenance) {
         p.line_slug === variant.line_slug &&
         ['wrapper', 'binder', 'filler'].includes(p.field),
     )
-    .map((p) => evidenceFrom(p.confidence, sourceId(p.source_name), PONTEIRO[p.field]));
+    .map((p) => evidenceFrom(p.confidence, sourceId(p.source_name, p.source_url), PONTEIRO[p.field]));
 
   if (evidence.length === 0) {
     throw new Error(
@@ -228,7 +246,7 @@ export function mapEditorial(row, variantIdValue) {
       complexity: row.complexity,
       pairings: row.pairings,
       tastingNotes: row.tasting_notes,
-      evidence: [evidenceFrom('confirmada', sourceId(row.source_name), '/summary')],
+      evidence: [evidenceFrom('confirmada', sourceId(row.source_name, row.source_url), '/summary')],
     }),
     body: `# ${variantIdValue} — dossiê\n\n${row.summary}\n`,
   };

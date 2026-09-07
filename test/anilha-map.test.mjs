@@ -35,9 +35,29 @@ test('a edicao padrao nao aparece no id; uma edicao nomeada aparece', () => {
   );
 });
 
-test('o id da fonte e derivado do nome, em slug', () => {
+test('sem URL, o id da fonte cai para o slug do nome', () => {
   assert.equal(sourceId('Oliva Cigars - Serie V Melanio'), 'oliva-cigars-serie-v-melanio');
   assert.equal(sourceId('JAMM Cigar - catalogo oficial'), 'jamm-cigar-catalogo-oficial');
+});
+
+test('com URL, o id da fonte vem do host e caminho, nao do nome', () => {
+  assert.equal(
+    sourceId('Oliva Cigars - Serie G', 'https://olivacigar.com/cigars/serie-g/'),
+    'olivacigar-com-cigars-serie-g',
+  );
+  assert.equal(
+    sourceId('Oliva Cigars - Serie G', 'https://www.olivacigar.com/cigars/serie-g/'),
+    'olivacigar-com-cigars-serie-g',
+  );
+});
+
+test('mesmo nome com URLs diferentes gera sourceId diferentes', () => {
+  // Regressao alvo: o Anilha reusa "Oliva Cigars - catalogo oficial" para tres
+  // paginas de linha distintas. Se o id caisse para o nome, as tres
+  // colapsariam num so documento e duas variantes citariam a pagina errada.
+  const a = sourceId('Oliva Cigars - catalogo oficial', 'https://olivacigar.com/cigars/serie-g/');
+  const b = sourceId('Oliva Cigars - catalogo oficial', 'https://olivacigar.com/cigars/serie-o/');
+  assert.notEqual(a, b);
 });
 
 test('a marca leva a historia no corpo e a fonte em evidencia', () => {
@@ -49,7 +69,7 @@ test('a marca leva a historia no corpo e a fonte em evidencia', () => {
   assert.match(body, /A tradição da família Oliva/);
   assert.deepEqual(frontmatter.evidence, [
     {
-      sourceId: 'oliva-cigars-the-oliva-legacy',
+      sourceId: 'olivacigar-com-the-oliva-legacy',
       field: '/story',
       relation: 'supports',
       confidence: 'high',
@@ -119,7 +139,7 @@ test('a proveniencia vira evidencia com ponteiro JSON', () => {
   assert.equal(capa.confidence, 'high');
   assert.equal(capa.claimType, 'manufacturer_claim');
   assert.equal(capa.relation, 'supports');
-  assert.equal(capa.sourceId, 'oliva-cigars-serie-v-melanio');
+  assert.equal(capa.sourceId, 'olivacigar-com-cigars-serie-v-melanio');
 });
 
 test('o dossie aponta para o caminho inteiro da variante e leva o resumo no corpo', () => {
