@@ -74,7 +74,7 @@ Medido no banco local em 2026-09-06, não estimado.
 | Edições | 28 | todas padrão; 6 com ano; nenhuma com fábrica |
 | Variantes | 46 | 25 blend completo, 11 parcial, 10 sem blend |
 | Blend divergente na mesma edição | 1 | vira o único `blendOverride` |
-| Evidências | 175 | **todas `confirmada`**, de 10 fontes / 13 URLs |
+| Evidências | 175 | **todas `confirmada`**, de fontes de fabricante e distribuidor oficial |
 | Dossiês | 46 | todos com fonte obrigatória |
 | `expected_minutes` | 0 | não há lacuna a resolver |
 
@@ -100,7 +100,7 @@ knowledge/brands/      11 arquivos
 knowledge/lines/       28
 knowledge/cigars/      28  (as 46 variantes moram dentro)
 knowledge/editorial/   46
-sources/               ~13 novos
+sources/               26 novos
 ```
 
 `knowledge/brands/` já existe com `.gitkeep`: a estrutura da KB sempre
@@ -182,9 +182,11 @@ não conseguem apontar para as variantes certas.
 
 ### Colapso da proveniência em evidência
 
-As 175 linhas são todas `confidence = 'confirmada'`, e as 10 fontes distintas
-são catálogo de fabricante, marcas oficiais ou classificação oficial da
-Habanos. Logo:
+As 175 linhas são todas `confidence = 'confirmada'`. Contando as três origens de
+fonte do Anilha — história de marca, proveniência e dossiê — são **29 nomes
+distintos sobre 26 URLs distintas**, todas em domínio de fabricante
+(arturofuente.com, jammcigar.com.br, menendezamerino.com, myfathercigars.com,
+olivacigar.com, padron.com) ou do distribuidor oficial (habanos.com). Logo:
 
 ```
 confirmada  →  confidence: high

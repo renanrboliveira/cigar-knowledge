@@ -1144,7 +1144,7 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 
 **Files:**
 - Create: `scripts/extract-from-anilha.mjs`
-- Create: `knowledge/brands/*.md` (11), `knowledge/lines/*.md` (28), `knowledge/cigars/*.md` (28), `knowledge/editorial/*.md` (46), `sources/manufacturers/*.md` (~13)
+- Create: `knowledge/brands/*.md` (11), `knowledge/lines/*.md` (28), `knowledge/cigars/*.md` (28), `knowledge/editorial/*.md` (46), `sources/manufacturers/*.md` (26)
 - Modify: `.gitignore` (ignorar o dump)
 
 **Interfaces:**
@@ -1326,7 +1326,7 @@ for d in knowledge/brands knowledge/lines knowledge/cigars knowledge/editorial s
   echo "$d: $(ls "$d"/*.md 2>/dev/null | wc -l | tr -d ' ')"
 done
 ```
-Expected: `11`, `28`, `28`, `46`, `13` mais 1 pré-existente (o `example-manufacturer-source.md`), ou seja 14 em `sources/manufacturers`.
+Expected: `11`, `28`, `28`, `46`, `26` mais 1 pré-existente (o `example-manufacturer-source.md`), ou seja 27 em `sources/manufacturers`. As 26 saem de 26 URLs distintas: o Anilha carrega fonte em três lugares (história de marca, proveniência e dossiê), com 29 nomes sobre essas 26 URLs.
 
 - [ ] **Step 5: Check that nothing was invented**
 
@@ -1390,7 +1390,7 @@ git add .gitignore scripts/extract-from-anilha.mjs knowledge/brands knowledge/li
 git commit -m "feat: trazer o catalogo do anilha para a base
 
 126 documentos extraidos das migrations 014-019: 11 marcas, 28 linhas, 28
-charutos com 46 variantes, 46 dossies e 13 fontes. Nenhum campo inventado -
+charutos com 46 variantes, 46 dossies e 26 fontes. Nenhum campo inventado -
 productionStatus entra como unknown nas 28 edicoes porque o Anilha nao tem o
 dado, e papel de blend desconhecido entra como null nas 11 variantes parciais.
 
