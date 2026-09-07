@@ -1,0 +1,30 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://cigar-knowledge.local/schema/brand.schema.yaml
+type: object
+required:
+  - schemaVersion
+  - id
+  - name
+additionalProperties: false
+properties:
+  schemaVersion:
+    $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/schemaVersion
+  id:
+    $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/slug
+  name:
+    type: string
+    minLength: 1
+  countryCode:
+    anyOf:
+      - type: string
+        pattern: ^[A-Z]{2}$
+      - type: 'null'
+  foundedYear:
+    anyOf:
+      - type: integer
+      - type: 'null'
+  evidence:
+    type: array
+    minItems: 1
+    items:
+      $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/evidenceRef
