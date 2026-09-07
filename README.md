@@ -10,6 +10,10 @@ validation.
   frontmatter.
 - `knowledge/` — reusable, source-backed technical and editorial knowledge,
   including concepts, terroirs, brands, and sensory material.
+- `knowledge/cigars/` — catálogo: marca, linha, edição, variantes e blend, com
+  evidência por campo.
+- `knowledge/lines/` — identidade e história de cada linha.
+- `knowledge/editorial/` — dossiê editorial por variante, com fonte obrigatória.
 - `personal/` — private cellar records, learning notes, comparisons, and future
   smoke sessions; these observations do not establish catalog facts.
 - `sources/` — source documents grouped by type plus the human-readable
