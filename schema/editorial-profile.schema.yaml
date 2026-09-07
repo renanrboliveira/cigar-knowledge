@@ -1,0 +1,71 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://cigar-knowledge.local/schema/editorial-profile.schema.yaml
+type: object
+required:
+  - schemaVersion
+  - id
+  - variantId
+  - evidence
+additionalProperties: false
+properties:
+  schemaVersion:
+    $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/schemaVersion
+  id:
+    $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/slug
+  variantId:
+    $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/slug
+  constructionType:
+    type:
+      - string
+      - 'null'
+  handmade:
+    type:
+      - boolean
+      - 'null'
+  boxPressed:
+    type:
+      - boolean
+      - 'null'
+  storage:
+    type: object
+    additionalProperties: false
+    properties:
+      minRelativeHumidity:
+        type:
+          - integer
+          - 'null'
+      maxRelativeHumidity:
+        type:
+          - integer
+          - 'null'
+      minCelsius:
+        type:
+          - integer
+          - 'null'
+      maxCelsius:
+        type:
+          - integer
+          - 'null'
+  experienceLevel:
+    type:
+      - string
+      - 'null'
+  complexity:
+    type:
+      - string
+      - 'null'
+  pairings:
+    type: array
+    items:
+      type: string
+      minLength: 1
+  tastingNotes:
+    type: array
+    items:
+      type: string
+      minLength: 1
+  evidence:
+    type: array
+    minItems: 1
+    items:
+      $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/evidenceRef
