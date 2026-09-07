@@ -252,3 +252,119 @@ test('blend divergente com proveniencia produz blendOverride valido para cada va
   assert.ok(frontmatter.variants[0].blendOverride.evidence.length > 0);
   assert.ok(frontmatter.variants[1].blendOverride.evidence.length > 0);
 });
+
+test('o ponteiro do blendOverride e indexado pela variante, e nao ha evidencia duplicada', () => {
+  const provenanceDivergente = [
+    {
+      brand_slug: 'oliva', line_slug: 'serie-o', release_slug: 'padrao', variant_slug: 'robusto',
+      field: 'wrapper', confidence: 'confirmada', source_name: 'Oliva Cigars - Serie O',
+      source_url: 'https://olivacigar.com/cigars/serie-o/', consulted_at: '2026-08-26',
+    },
+    {
+      brand_slug: 'oliva', line_slug: 'serie-o', release_slug: 'padrao', variant_slug: 'toro',
+      field: 'wrapper', confidence: 'confirmada', source_name: 'Oliva Cigars - Serie O',
+      source_url: 'https://olivacigar.com/cigars/serie-o/', consulted_at: '2026-08-26',
+    },
+  ];
+  const { frontmatter } = mapCigar(releaseDivergente, variantesDivergentes, provenanceDivergente);
+
+  assert.equal(
+    frontmatter.variants[1].blendOverride.evidence[0].field,
+    '/variants/1/blendOverride/blend/wrapper',
+  );
+  // o documento nao tem /blend, entao /blend/wrapper seria ponteiro pendurado
+  for (const v of frontmatter.variants) {
+    for (const e of v.blendOverride.evidence) assert.equal(e.field.startsWith('/variants/'), true);
+    for (const papel of ['wrapper', 'binder', 'filler']) {
+      const componentes = v.blendOverride.blend[papel];
+      if (componentes) for (const c of componentes) assert.equal('evidence' in c, false);
+    }
+  }
+});
+
+test('o override nao herda evidencia de outra edicao da mesma linha', () => {
+  // M12: filtrar so por linha e vitola deixaria a edicao nomeada citar a
+  // pagina da edicao padrao.
+  const deOutraEdicao = [
+    {
+      brand_slug: 'oliva', line_slug: 'serie-o', release_slug: 'edicao-2020', variant_slug: 'robusto',
+      field: 'wrapper', confidence: 'confirmada', source_name: 'Oliva Cigars - Serie O 2020',
+      source_url: 'https://olivacigar.com/cigars/serie-o-2020/', consulted_at: '2026-08-26',
+    },
+  ];
+  assert.throws(() => mapCigar(releaseDivergente, variantesDivergentes, deOutraEdicao), /oliva-serie-o-robusto/);
+});
+
+test('perfil declarado divergente entre variantes nao sobe para o charuto', () => {
+  // I3: a mesma disciplina do blend. `variants[0]` nao fala pela edicao.
+  const divergentes = variantesDivergentes.map((v, i) => ({ ...v, strength: i === 0 ? 3 : 5 }));
+  const { frontmatter } = mapCigar(releaseDivergente, divergentes, [
+    {
+      brand_slug: 'oliva', line_slug: 'serie-o', release_slug: 'padrao', variant_slug: 'robusto',
+      field: 'wrapper', confidence: 'confirmada', source_name: 'Oliva Cigars - Serie O',
+      source_url: 'https://olivacigar.com/cigars/serie-o/', consulted_at: '2026-08-26',
+    },
+    {
+      brand_slug: 'oliva', line_slug: 'serie-o', release_slug: 'padrao', variant_slug: 'toro',
+      field: 'wrapper', confidence: 'confirmada', source_name: 'Oliva Cigars - Serie O',
+      source_url: 'https://olivacigar.com/cigars/serie-o/', consulted_at: '2026-08-26',
+    },
+  ]);
+  assert.equal('declaredProfile' in frontmatter, false);
+});
+
+test('perfil igual entre variantes sobe para o charuto', () => {
+  const iguais = variantesDivergentes.map((v) => ({ ...v, strength: 4 }));
+  const { frontmatter } = mapCigar(releaseDivergente, iguais, [
+    {
+      brand_slug: 'oliva', line_slug: 'serie-o', release_slug: 'padrao', variant_slug: 'robusto',
+      field: 'wrapper', confidence: 'confirmada', source_name: 'Oliva Cigars - Serie O',
+      source_url: 'https://olivacigar.com/cigars/serie-o/', consulted_at: '2026-08-26',
+    },
+    {
+      brand_slug: 'oliva', line_slug: 'serie-o', release_slug: 'padrao', variant_slug: 'toro',
+      field: 'wrapper', confidence: 'confirmada', source_name: 'Oliva Cigars - Serie O',
+      source_url: 'https://olivacigar.com/cigars/serie-o/', consulted_at: '2026-08-26',
+    },
+  ]);
+  assert.equal(frontmatter.declaredProfile.strength, 4);
+});
+
+test('medidas e forca viram evidencia no nivel do charuto, com ponteiro indexado', () => {
+  // I2: sem isto, 89 das 175 linhas de proveniencia do Anilha eram descartadas.
+  const variantes = variantesDe('serie-g');
+  const provenanceMedidas = [
+    {
+      brand_slug: 'oliva', line_slug: 'serie-g', release_slug: 'padrao', variant_slug: 'robusto',
+      field: 'length_mm', confidence: 'confirmada', source_name: 'Oliva Cigars - Serie G',
+      source_url: 'https://olivacigar.com/cigars/serie-g/', consulted_at: '2026-08-26',
+    },
+    {
+      brand_slug: 'oliva', line_slug: 'serie-g', release_slug: 'padrao', variant_slug: 'robusto',
+      field: 'ring_gauge', confidence: 'confirmada', source_name: 'Oliva Cigars - Serie G',
+      source_url: 'https://olivacigar.com/cigars/serie-g/', consulted_at: '2026-08-26',
+    },
+    ...dump.provenance.filter((p) => p.field === 'strength'),
+  ];
+  const { frontmatter } = mapCigar(releaseDe('serie-g'), variantes, provenanceMedidas);
+
+  assert.deepEqual(
+    frontmatter.evidence.map((e) => e.field),
+    ['/variants/0/vitola/lengthMm', '/variants/0/vitola/ringGauge', '/declaredProfile/strength'],
+  );
+});
+
+test('o dossie carimba nota de degustacao como descricao sensorial, nao como fato', () => {
+  const { frontmatter } = mapEditorial(dump.editorial[0], 'oliva-serie-g-robusto');
+  assert.equal(frontmatter.evidence.length, 2);
+  assert.equal(frontmatter.evidence[0].field, '/summary');
+  assert.equal(frontmatter.evidence[0].claimType, 'manufacturer_claim');
+  assert.equal(frontmatter.evidence[1].field, '/tastingNotes');
+  assert.equal(frontmatter.evidence[1].claimType, 'sensory_description');
+});
+
+test('lista vazia de harmonizacao vira campo ausente, nao array vazio', () => {
+  // Array vazio afirma "nao harmoniza com nada"; ausencia diz "nao sei".
+  const { frontmatter } = mapEditorial(dump.editorial[0], 'oliva-serie-g-robusto');
+  assert.equal('pairings' in frontmatter, false);
+});

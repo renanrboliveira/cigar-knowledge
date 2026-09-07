@@ -98,42 +98,63 @@ export function mapLine(row) {
   };
 }
 
-const PONTEIRO = {
+// Ponteiro do blend que sobe para o charuto. Dentro de `blendOverride` o
+// ponteiro e outro (indexado pela variante), por isso ele nao mora aqui.
+const PONTEIRO_BLEND = {
   wrapper: '/blend/wrapper',
   binder: '/blend/binder',
   filler: '/blend/filler',
-  strength: '/declaredProfile/strength',
+};
+
+// `length_mm` e `ring_gauge` sao por variante, entao o ponteiro precisa do
+// indice dela dentro de `variants`; `strength` e do charuto inteiro. Sem esses
+// tres, 89 das 175 linhas de proveniencia do Anilha morriam na traducao e a
+// fonte que so as sustenta ficaria orfa em `sources/`.
+const PONTEIRO_DO_CHARUTO = {
+  length_mm: (i) => `/variants/${i}/vitola/lengthMm`,
+  ring_gauge: (i) => `/variants/${i}/vitola/ringGauge`,
+  strength: () => '/declaredProfile/strength',
 };
 
 const assinaturaDoBlend = (v) => `${v.wrapper ?? '~'}|${v.binder ?? '~'}|${v.filler ?? '~'}`;
 
-function componentesDe(variant, provenance, papel) {
+// O mesmo criterio do blend, aplicado ao perfil declarado: `declaredProfile`
+// saia de `variants[0]` sem checar as outras seria afirmar sobre a edicao
+// inteira o que a fonte diz de uma variante so.
+const assinaturaDoPerfil = (v) =>
+  `${v.strength ?? '~'}|${v.official_body ?? '~'}|${v.official_flavor_intensity ?? '~'}`;
+
+const daVariante = (p, variant) =>
+  p.variant_slug === variant.slug &&
+  p.line_slug === variant.line_slug &&
+  p.release_slug === variant.release_slug;
+
+// `ponteiro` nulo significa "esta evidencia mora em outro lugar": dentro de
+// `blendOverride` ela vai na lista do override, com ponteiro indexado, e
+// repeti-la no componente contaria o mesmo fato duas vezes.
+function componentesDe(variant, provenance, papel, ponteiro) {
   const rawLabel = variant[papel];
   if (rawLabel === null || rawLabel === undefined) return null;
 
-  const fontes = provenance.filter(
-    (p) =>
-      p.variant_slug === variant.slug &&
-      p.line_slug === variant.line_slug &&
-      p.release_slug === variant.release_slug &&
-      p.field === papel,
-  );
+  const fontes = ponteiro
+    ? provenance.filter((p) => daVariante(p, variant) && p.field === papel)
+    : [];
 
   return [
     semNulos({
       rawLabel,
       role: papel,
       evidence: fontes.length
-        ? fontes.map((p) => evidenceFrom(p.confidence, sourceId(p.source_name, p.source_url), PONTEIRO[papel]))
+        ? fontes.map((p) => evidenceFrom(p.confidence, sourceId(p.source_name, p.source_url), ponteiro))
         : undefined,
     }),
   ];
 }
 
-const blendDe = (variant, provenance) => ({
-  wrapper: componentesDe(variant, provenance, 'wrapper'),
-  binder: componentesDe(variant, provenance, 'binder'),
-  filler: componentesDe(variant, provenance, 'filler'),
+const blendDe = (variant, provenance, ponteiros) => ({
+  wrapper: componentesDe(variant, provenance, 'wrapper', ponteiros?.wrapper ?? null),
+  binder: componentesDe(variant, provenance, 'binder', ponteiros?.binder ?? null),
+  filler: componentesDe(variant, provenance, 'filler', ponteiros?.filler ?? null),
 });
 
 // O nome do charuto e legivel, nunca o slug: `cigar.schema.yaml` exige `name`
@@ -152,15 +173,19 @@ const nomeDoCharuto = (r) =>
 // silenciar o override perderia blend real do banco, e emiti-lo sem
 // evidencia geraria um documento que o schema recusa (ou que mente, se o
 // schema um dia relaxar). Melhor parar aqui e virar decisao humana.
-function blendOverrideDe(variant, chave, provenance) {
+function blendOverrideDe(variant, indice, chave, provenance) {
+  // O filtro exige `release_slug` tambem: sem ele, uma edicao nomeada que
+  // repetisse o slug da vitola herdaria a evidencia da outra edicao da mesma
+  // linha, e o override citaria uma pagina que fala de outro charuto.
   const evidence = provenance
-    .filter(
-      (p) =>
-        p.variant_slug === variant.slug &&
-        p.line_slug === variant.line_slug &&
-        ['wrapper', 'binder', 'filler'].includes(p.field),
-    )
-    .map((p) => evidenceFrom(p.confidence, sourceId(p.source_name, p.source_url), PONTEIRO[p.field]));
+    .filter((p) => daVariante(p, variant) && ['wrapper', 'binder', 'filler'].includes(p.field))
+    .map((p) =>
+      evidenceFrom(
+        p.confidence,
+        sourceId(p.source_name, p.source_url),
+        `/variants/${indice}/blendOverride/blend/${p.field}`,
+      ),
+    );
 
   if (evidence.length === 0) {
     throw new Error(
@@ -169,7 +194,7 @@ function blendOverrideDe(variant, chave, provenance) {
     );
   }
 
-  return { blend: blendDe(variant, provenance), evidence };
+  return { blend: blendDe(variant, provenance, null), evidence };
 }
 
 export function mapCigar(release, variants, provenance) {
@@ -186,11 +211,42 @@ export function mapCigar(release, variants, provenance) {
   const compartilhado = assinaturas.size === 1;
   const semBlendNenhum = compartilhado && assinaturaDoBlend(variants[0]) === '~|~|~';
 
-  const declarado = semNulos({
-    strength: variants[0].strength,
-    body: variants[0].official_body,
-    flavorIntensity: variants[0].official_flavor_intensity,
-  });
+  const perfilCompartilhado = new Set(variants.map(assinaturaDoPerfil)).size === 1;
+  const declarado = perfilCompartilhado
+    ? semNulos({
+        strength: variants[0].strength,
+        body: variants[0].official_body,
+        flavorIntensity: variants[0].official_flavor_intensity,
+      })
+    : {};
+
+  // Evidencia dos campos que nao sao de blend. Ela mora no nivel do charuto
+  // porque o ponteiro atravessa o documento inteiro (`/variants/<i>/...`), e
+  // nao dentro de um componente de blend.
+  const evidenciaDoCharuto = [];
+  const vistas = new Set();
+  for (const p of provenance) {
+    if (p.brand_slug !== release.brand_slug) continue;
+    if (p.line_slug !== release.line_slug || p.release_slug !== release.slug) continue;
+    const indice = variants.findIndex((v) => v.slug === p.variant_slug);
+    if (indice === -1) continue;
+    const ponteiro = PONTEIRO_DO_CHARUTO[p.field];
+    if (!ponteiro) continue;
+    // Ponteiro pendurado e pior que evidencia ausente: se o perfil divergiu,
+    // `/declaredProfile/strength` nao existe no documento e a evidencia nao vai.
+    if (p.field === 'strength' && !('strength' in declarado)) continue;
+    const evidencia = evidenceFrom(
+      p.confidence,
+      sourceId(p.source_name, p.source_url),
+      ponteiro(indice),
+    );
+    // `strength` e um campo so do charuto: varias variantes com proveniencia
+    // dele produziriam a mesma evidencia repetida.
+    const chaveDedup = JSON.stringify(evidencia);
+    if (vistas.has(chaveDedup)) continue;
+    vistas.add(chaveDedup);
+    evidenciaDoCharuto.push(evidencia);
+  }
 
   return {
     id,
@@ -200,14 +256,15 @@ export function mapCigar(release, variants, provenance) {
       brand: release.brand_slug,
       line: `${release.brand_slug}-${release.line_slug}`,
       name: nomeDoCharuto(release),
-      blend: compartilhado && !semBlendNenhum ? blendDe(variants[0], provenance) : null,
+      evidence: evidenciaDoCharuto.length ? evidenciaDoCharuto : undefined,
+      blend: compartilhado && !semBlendNenhum ? blendDe(variants[0], provenance, PONTEIRO_BLEND) : null,
       release: semNulos({
         releaseYear: release.release_year,
         editionName: release.is_default ? null : release.name,
         productionStatus: 'unknown',
       }),
       declaredProfile: Object.keys(declarado).length ? declarado : undefined,
-      variants: variants.map((v) =>
+      variants: variants.map((v, i) =>
         semNulos({
           id: variantId({ ...chave, variant: v.slug }),
           name: v.vitola,
@@ -216,7 +273,7 @@ export function mapCigar(release, variants, provenance) {
             lengthMm: v.length_mm,
             ringGauge: v.ring_gauge,
           }),
-          blendOverride: compartilhado ? undefined : blendOverrideDe(v, chave, provenance),
+          blendOverride: compartilhado ? undefined : blendOverrideDe(v, i, chave, provenance),
         }),
       ),
     }),
@@ -244,9 +301,24 @@ export function mapEditorial(row, variantIdValue) {
       storage: Object.keys(storage).length ? storage : undefined,
       experienceLevel: row.experience_level,
       complexity: row.complexity,
-      pairings: row.pairings,
-      tastingNotes: row.tasting_notes,
-      evidence: [evidenceFrom('confirmada', sourceId(row.source_name, row.source_url), '/summary')],
+      // Array vazio afirma "nao harmoniza com nada"; ausencia diz "nao sei",
+      // que e o que o banco realmente registra (regra 6).
+      pairings: row.pairings?.length ? row.pairings : undefined,
+      tastingNotes: row.tasting_notes?.length ? row.tasting_notes : undefined,
+      // Regra 3: fato e afirmacao sensorial nao levam o mesmo carimbo. O resumo
+      // e declaracao do fabricante; as notas de degustacao sao descricao
+      // sensorial, e `tobacco.schema.yaml` tem `sensory_description` para isso.
+      evidence: [
+        evidenceFrom('confirmada', sourceId(row.source_name, row.source_url), '/summary'),
+        ...(row.tasting_notes?.length
+          ? [
+              {
+                ...evidenceFrom('confirmada', sourceId(row.source_name, row.source_url), '/tastingNotes'),
+                claimType: 'sensory_description',
+              },
+            ]
+          : []),
+      ],
     }),
     body: `# ${variantIdValue} — dossiê\n\n${row.summary}\n`,
   };
