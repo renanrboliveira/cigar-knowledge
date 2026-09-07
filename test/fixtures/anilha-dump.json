@@ -1,0 +1,34 @@
+{
+  "brands": [
+    {
+      "slug": "oliva",
+      "name": "Oliva",
+      "country": "NI",
+      "founded_year": 1886,
+      "story": "A tradição da família Oliva começou em 1886.",
+      "story_source_name": "Oliva Cigars - The Oliva Legacy",
+      "story_source_url": "https://olivacigar.com/the-oliva-legacy/",
+      "story_consulted_at": "2026-08-26"
+    }
+  ],
+  "lines": [
+    { "brand_slug": "oliva", "slug": "serie-v-melanio", "name": "Serie V Melanio", "story": "A Serie V Melanio homenageia Melanio Oliva." },
+    { "brand_slug": "oliva", "slug": "serie-g", "name": "Serie G", "story": null }
+  ],
+  "releases": [
+    { "brand_slug": "oliva", "brand_name": "Oliva", "line_slug": "serie-v-melanio", "line_name": "Serie V Melanio", "slug": "padrao", "name": null, "is_default": true, "release_year": null },
+    { "brand_slug": "oliva", "brand_name": "Oliva", "line_slug": "serie-g", "line_name": "Serie G", "slug": "padrao", "name": null, "is_default": true, "release_year": 2007 }
+  ],
+  "variants": [
+    { "brand_slug": "oliva", "line_slug": "serie-v-melanio", "release_slug": "padrao", "slug": "robusto", "vitola": "Robusto", "length_mm": 127, "ring_gauge": 52, "wrapper": "Sumatra equatoriana", "binder": "Nicaragua", "filler": "Ligero de Jalapa, Nicaragua", "strength": null, "official_body": null, "official_flavor_intensity": null },
+    { "brand_slug": "oliva", "line_slug": "serie-v-melanio", "release_slug": "padrao", "slug": "figurado", "vitola": "Figurado", "length_mm": 165, "ring_gauge": 54, "wrapper": "Sumatra equatoriana", "binder": "Nicaragua", "filler": "Ligero de Jalapa, Nicaragua", "strength": null, "official_body": null, "official_flavor_intensity": null },
+    { "brand_slug": "oliva", "line_slug": "serie-g", "release_slug": "padrao", "slug": "robusto", "vitola": "Robusto", "length_mm": 114, "ring_gauge": 50, "wrapper": "Cameroon", "binder": null, "filler": null, "strength": 3, "official_body": null, "official_flavor_intensity": null }
+  ],
+  "provenance": [
+    { "brand_slug": "oliva", "line_slug": "serie-v-melanio", "release_slug": "padrao", "variant_slug": "robusto", "field": "wrapper", "confidence": "confirmada", "source_name": "Oliva Cigars - Serie V Melanio", "source_url": "https://olivacigar.com/cigars/serie-v-melanio/", "consulted_at": "2026-08-26" },
+    { "brand_slug": "oliva", "line_slug": "serie-g", "release_slug": "padrao", "variant_slug": "robusto", "field": "strength", "confidence": "confirmada", "source_name": "Oliva Cigars - catalogo oficial", "source_url": "https://olivacigar.com/", "consulted_at": "2026-08-26" }
+  ],
+  "editorial": [
+    { "brand_slug": "oliva", "line_slug": "serie-g", "release_slug": "padrao", "variant_slug": "robusto", "summary": "O Oliva Serie G Robusto mede 114 mm por anel 50.", "construction_type": "Long filler", "handmade": true, "box_pressed": null, "storage_min_rh": null, "storage_max_rh": null, "storage_min_c": null, "storage_max_c": null, "experience_level": "Intermediario", "complexity": "Equilibrada", "pairings": [], "tasting_notes": ["Cedro", "Cafe"], "source_name": "Oliva Cigars - Serie G", "source_url": "https://olivacigar.com/cigars/serie-g/", "consulted_at": "2026-08-26" }
+  ]
+}
