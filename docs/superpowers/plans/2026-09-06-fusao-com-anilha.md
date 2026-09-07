@@ -912,7 +912,7 @@ import YAML from 'yaml';
 const slugify = (texto) =>
   texto
     .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
+    .replace(/[\u0300-\u036f]/g, '')  // marcas combinantes, escapadas de proposito
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
