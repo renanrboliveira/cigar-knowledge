@@ -4,6 +4,19 @@ id: dona-flor-gran-93
 brand: dona-flor
 line: dona-flor-gran-93
 name: Dona Flor Gran 93
+evidence:
+  - sourceId: menendezamerino-com-produtos
+    field: /variants/0/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: menendezamerino-com-produtos
+    field: /variants/0/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
 blend:
   wrapper:
     - rawLabel: Mata Fina

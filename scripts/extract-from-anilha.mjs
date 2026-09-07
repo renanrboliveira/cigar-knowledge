@@ -67,20 +67,39 @@ function tipoDaFonte(url) {
   }
 }
 
+const linhasDeFonte = [
+  ...dump.brands.map((b) => ({ nome: b.story_source_name, url: b.story_source_url, data: b.story_consulted_at })),
+  ...dump.provenance.map((p) => ({ nome: p.source_name, url: p.source_url, data: p.consulted_at })),
+  ...dump.editorial.map((e) => ({ nome: e.source_name, url: e.source_url, data: e.consulted_at })),
+].filter((l) => l.nome);
+
+// Quantas fontes distintas cada titulo cobre. "Oliva Cigars - catalogo
+// oficial" cobre tres paginas de linha; "Oliva Cigars - Serie G" cobre uma. O
+// titulo reusado nao identifica pagina nenhuma, entao ele perde do especifico
+// mesmo sendo a string mais longa - comprimento sozinho escolheria o generico
+// em quatro dos seis casos reais.
+const fontesPorTitulo = new Map();
+for (const linha of linhasDeFonte) {
+  const id = sourceId(linha.nome, linha.url);
+  if (!fontesPorTitulo.has(linha.nome)) fontesPorTitulo.set(linha.nome, new Set());
+  fontesPorTitulo.get(linha.nome).add(id);
+}
+// Desempate: entre titulos igualmente especificos, o mais longo diz mais.
+const maisEspecifico = (a, b) => {
+  const alcance = fontesPorTitulo.get(a).size - fontesPorTitulo.get(b).size;
+  return alcance !== 0 ? (alcance < 0 ? a : b) : a.length >= b.length ? a : b;
+};
+
 const fontes = new Map();
-for (const linha of [...dump.brands.map((b) => ({ nome: b.story_source_name, url: b.story_source_url, data: b.story_consulted_at })), ...dump.provenance.map((p) => ({ nome: p.source_name, url: p.source_url, data: p.consulted_at })), ...dump.editorial.map((e) => ({ nome: e.source_name, url: e.source_url, data: e.consulted_at }))]) {
-  if (!linha.nome) continue;
+for (const linha of linhasDeFonte) {
   const id = sourceId(linha.nome, linha.url);
   const anterior = fontes.get(id);
   if (!anterior) {
     fontes.set(id, linha);
     continue;
   }
-  // A mesma URL aparece no Anilha com titulos diferentes ("Oliva Cigars -
-  // catalogo oficial" e "Oliva Cigars - Serie G"). First-wins ficava com o
-  // generico; o mais longo e o criterio simples que preserva o mais especifico.
   fontes.set(id, {
-    nome: linha.nome.length > anterior.nome.length ? linha.nome : anterior.nome,
+    nome: maisEspecifico(anterior.nome, linha.nome),
     url: anterior.url ?? linha.url,
     // Consulta mais recente descreve melhor o estado da pagina que foi lida.
     data: [anterior.data, linha.data].filter(Boolean).sort().at(-1) ?? null,

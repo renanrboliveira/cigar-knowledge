@@ -7,8 +7,6 @@ handmade: true
 boxPressed: false
 experienceLevel: Iniciante
 complexity: Equilibrada
-pairings: []
-tastingNotes: []
 evidence:
   - sourceId: padron-com-damaso-series
     field: /summary

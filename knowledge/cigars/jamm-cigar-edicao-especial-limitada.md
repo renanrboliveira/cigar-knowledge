@@ -4,6 +4,25 @@ id: jamm-cigar-edicao-especial-limitada
 brand: jamm-cigar
 line: jamm-cigar-edicao-especial-limitada
 name: JAMM Cigar Edicao Especial/Limitada
+evidence:
+  - sourceId: jammcigar-com-br
+    field: /variants/0/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/0/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /declaredProfile/strength
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
 blend:
   wrapper: null
   binder: null

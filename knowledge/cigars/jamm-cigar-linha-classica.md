@@ -4,6 +4,133 @@ id: jamm-cigar-linha-classica
 brand: jamm-cigar
 line: jamm-cigar-linha-classica
 name: JAMM Cigar Linha Classica
+evidence:
+  - sourceId: jammcigar-com-br
+    field: /variants/0/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/0/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /declaredProfile/strength
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/1/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/1/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/2/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/2/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/3/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/3/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/4/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/4/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/5/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/5/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/6/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/6/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/7/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/7/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/8/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/8/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/9/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/9/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
 release:
   productionStatus: unknown
 declaredProfile:
@@ -20,48 +147,27 @@ variants:
         wrapper:
           - rawLabel: Cubra
             role: wrapper
-            evidence:
-              - sourceId: jammcigar-com-br
-                field: /blend/wrapper
-                relation: supports
-                confidence: high
-                claimType: manufacturer_claim
-                status: supported
         binder:
           - rawLabel: Cubra
             role: binder
-            evidence:
-              - sourceId: jammcigar-com-br
-                field: /blend/binder
-                relation: supports
-                confidence: high
-                claimType: manufacturer_claim
-                status: supported
         filler:
           - rawLabel: Mata Fina e Cubra
             role: filler
-            evidence:
-              - sourceId: jammcigar-com-br
-                field: /blend/filler
-                relation: supports
-                confidence: high
-                claimType: manufacturer_claim
-                status: supported
       evidence:
         - sourceId: jammcigar-com-br
-          field: /blend/binder
+          field: /variants/0/blendOverride/blend/binder
           relation: supports
           confidence: high
           claimType: manufacturer_claim
           status: supported
         - sourceId: jammcigar-com-br
-          field: /blend/filler
+          field: /variants/0/blendOverride/blend/filler
           relation: supports
           confidence: high
           claimType: manufacturer_claim
           status: supported
         - sourceId: jammcigar-com-br
-          field: /blend/wrapper
+          field: /variants/0/blendOverride/blend/wrapper
           relation: supports
           confidence: high
           claimType: manufacturer_claim
@@ -77,48 +183,27 @@ variants:
         wrapper:
           - rawLabel: Cubra
             role: wrapper
-            evidence:
-              - sourceId: jammcigar-com-br
-                field: /blend/wrapper
-                relation: supports
-                confidence: high
-                claimType: manufacturer_claim
-                status: supported
         binder:
           - rawLabel: Cubra
             role: binder
-            evidence:
-              - sourceId: jammcigar-com-br
-                field: /blend/binder
-                relation: supports
-                confidence: high
-                claimType: manufacturer_claim
-                status: supported
         filler:
           - rawLabel: Mata Fina e Cubra
             role: filler
-            evidence:
-              - sourceId: jammcigar-com-br
-                field: /blend/filler
-                relation: supports
-                confidence: high
-                claimType: manufacturer_claim
-                status: supported
       evidence:
         - sourceId: jammcigar-com-br
-          field: /blend/binder
+          field: /variants/1/blendOverride/blend/binder
           relation: supports
           confidence: high
           claimType: manufacturer_claim
           status: supported
         - sourceId: jammcigar-com-br
-          field: /blend/filler
+          field: /variants/1/blendOverride/blend/filler
           relation: supports
           confidence: high
           claimType: manufacturer_claim
           status: supported
         - sourceId: jammcigar-com-br
-          field: /blend/wrapper
+          field: /variants/1/blendOverride/blend/wrapper
           relation: supports
           confidence: high
           claimType: manufacturer_claim
@@ -134,48 +219,27 @@ variants:
         wrapper:
           - rawLabel: Cubra
             role: wrapper
-            evidence:
-              - sourceId: jammcigar-com-br
-                field: /blend/wrapper
-                relation: supports
-                confidence: high
-                claimType: manufacturer_claim
-                status: supported
         binder:
           - rawLabel: Cubra
             role: binder
-            evidence:
-              - sourceId: jammcigar-com-br
-                field: /blend/binder
-                relation: supports
-                confidence: high
-                claimType: manufacturer_claim
-                status: supported
         filler:
           - rawLabel: Mata Fina e Cubra
             role: filler
-            evidence:
-              - sourceId: jammcigar-com-br
-                field: /blend/filler
-                relation: supports
-                confidence: high
-                claimType: manufacturer_claim
-                status: supported
       evidence:
         - sourceId: jammcigar-com-br
-          field: /blend/binder
+          field: /variants/2/blendOverride/blend/binder
           relation: supports
           confidence: high
           claimType: manufacturer_claim
           status: supported
         - sourceId: jammcigar-com-br
-          field: /blend/filler
+          field: /variants/2/blendOverride/blend/filler
           relation: supports
           confidence: high
           claimType: manufacturer_claim
           status: supported
         - sourceId: jammcigar-com-br
-          field: /blend/wrapper
+          field: /variants/2/blendOverride/blend/wrapper
           relation: supports
           confidence: high
           claimType: manufacturer_claim
@@ -193,16 +257,9 @@ variants:
         filler:
           - rawLabel: Mata Fina e Cubra
             role: filler
-            evidence:
-              - sourceId: jammcigar-com-br
-                field: /blend/filler
-                relation: supports
-                confidence: high
-                claimType: manufacturer_claim
-                status: supported
       evidence:
         - sourceId: jammcigar-com-br
-          field: /blend/filler
+          field: /variants/3/blendOverride/blend/filler
           relation: supports
           confidence: high
           claimType: manufacturer_claim
@@ -220,16 +277,9 @@ variants:
         filler:
           - rawLabel: Mata Fina e Cubra
             role: filler
-            evidence:
-              - sourceId: jammcigar-com-br
-                field: /blend/filler
-                relation: supports
-                confidence: high
-                claimType: manufacturer_claim
-                status: supported
       evidence:
         - sourceId: jammcigar-com-br
-          field: /blend/filler
+          field: /variants/4/blendOverride/blend/filler
           relation: supports
           confidence: high
           claimType: manufacturer_claim
@@ -247,16 +297,9 @@ variants:
         filler:
           - rawLabel: Mata Fina e Cubra
             role: filler
-            evidence:
-              - sourceId: jammcigar-com-br
-                field: /blend/filler
-                relation: supports
-                confidence: high
-                claimType: manufacturer_claim
-                status: supported
       evidence:
         - sourceId: jammcigar-com-br
-          field: /blend/filler
+          field: /variants/5/blendOverride/blend/filler
           relation: supports
           confidence: high
           claimType: manufacturer_claim
@@ -272,48 +315,27 @@ variants:
         wrapper:
           - rawLabel: Cubra
             role: wrapper
-            evidence:
-              - sourceId: jammcigar-com-br
-                field: /blend/wrapper
-                relation: supports
-                confidence: high
-                claimType: manufacturer_claim
-                status: supported
         binder:
           - rawLabel: Cubra
             role: binder
-            evidence:
-              - sourceId: jammcigar-com-br
-                field: /blend/binder
-                relation: supports
-                confidence: high
-                claimType: manufacturer_claim
-                status: supported
         filler:
           - rawLabel: Mata Fina e Cubra
             role: filler
-            evidence:
-              - sourceId: jammcigar-com-br
-                field: /blend/filler
-                relation: supports
-                confidence: high
-                claimType: manufacturer_claim
-                status: supported
       evidence:
         - sourceId: jammcigar-com-br
-          field: /blend/binder
+          field: /variants/6/blendOverride/blend/binder
           relation: supports
           confidence: high
           claimType: manufacturer_claim
           status: supported
         - sourceId: jammcigar-com-br
-          field: /blend/filler
+          field: /variants/6/blendOverride/blend/filler
           relation: supports
           confidence: high
           claimType: manufacturer_claim
           status: supported
         - sourceId: jammcigar-com-br
-          field: /blend/wrapper
+          field: /variants/6/blendOverride/blend/wrapper
           relation: supports
           confidence: high
           claimType: manufacturer_claim
@@ -329,48 +351,27 @@ variants:
         wrapper:
           - rawLabel: Cubra
             role: wrapper
-            evidence:
-              - sourceId: jammcigar-com-br
-                field: /blend/wrapper
-                relation: supports
-                confidence: high
-                claimType: manufacturer_claim
-                status: supported
         binder:
           - rawLabel: Cubra
             role: binder
-            evidence:
-              - sourceId: jammcigar-com-br
-                field: /blend/binder
-                relation: supports
-                confidence: high
-                claimType: manufacturer_claim
-                status: supported
         filler:
           - rawLabel: Mata Fina e Cubra
             role: filler
-            evidence:
-              - sourceId: jammcigar-com-br
-                field: /blend/filler
-                relation: supports
-                confidence: high
-                claimType: manufacturer_claim
-                status: supported
       evidence:
         - sourceId: jammcigar-com-br
-          field: /blend/binder
+          field: /variants/7/blendOverride/blend/binder
           relation: supports
           confidence: high
           claimType: manufacturer_claim
           status: supported
         - sourceId: jammcigar-com-br
-          field: /blend/filler
+          field: /variants/7/blendOverride/blend/filler
           relation: supports
           confidence: high
           claimType: manufacturer_claim
           status: supported
         - sourceId: jammcigar-com-br
-          field: /blend/wrapper
+          field: /variants/7/blendOverride/blend/wrapper
           relation: supports
           confidence: high
           claimType: manufacturer_claim
@@ -388,16 +389,9 @@ variants:
         filler:
           - rawLabel: Mata Fina e Cubra
             role: filler
-            evidence:
-              - sourceId: jammcigar-com-br
-                field: /blend/filler
-                relation: supports
-                confidence: high
-                claimType: manufacturer_claim
-                status: supported
       evidence:
         - sourceId: jammcigar-com-br
-          field: /blend/filler
+          field: /variants/8/blendOverride/blend/filler
           relation: supports
           confidence: high
           claimType: manufacturer_claim
@@ -413,48 +407,27 @@ variants:
         wrapper:
           - rawLabel: Cubra
             role: wrapper
-            evidence:
-              - sourceId: jammcigar-com-br
-                field: /blend/wrapper
-                relation: supports
-                confidence: high
-                claimType: manufacturer_claim
-                status: supported
         binder:
           - rawLabel: Cubra
             role: binder
-            evidence:
-              - sourceId: jammcigar-com-br
-                field: /blend/binder
-                relation: supports
-                confidence: high
-                claimType: manufacturer_claim
-                status: supported
         filler:
           - rawLabel: Mata Fina e Cubra
             role: filler
-            evidence:
-              - sourceId: jammcigar-com-br
-                field: /blend/filler
-                relation: supports
-                confidence: high
-                claimType: manufacturer_claim
-                status: supported
       evidence:
         - sourceId: jammcigar-com-br
-          field: /blend/binder
+          field: /variants/9/blendOverride/blend/binder
           relation: supports
           confidence: high
           claimType: manufacturer_claim
           status: supported
         - sourceId: jammcigar-com-br
-          field: /blend/filler
+          field: /variants/9/blendOverride/blend/filler
           relation: supports
           confidence: high
           claimType: manufacturer_claim
           status: supported
         - sourceId: jammcigar-com-br
-          field: /blend/wrapper
+          field: /variants/9/blendOverride/blend/wrapper
           relation: supports
           confidence: high
           claimType: manufacturer_claim

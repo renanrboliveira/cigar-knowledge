@@ -4,8 +4,6 @@ id: dona-flor-mata-fina-robusto
 variantId: dona-flor-mata-fina-robusto
 constructionType: Long filler
 handmade: true
-pairings: []
-tastingNotes: []
 evidence:
   - sourceId: menendezamerino-com-produtos
     field: /summary

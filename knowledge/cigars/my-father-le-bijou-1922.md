@@ -4,6 +4,13 @@ id: my-father-le-bijou-1922
 brand: my-father
 line: my-father-le-bijou-1922
 name: My Father Le Bijou 1922
+evidence:
+  - sourceId: myfathercigars-com-cigar-my-father-le-bijou-1922
+    field: /declaredProfile/strength
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
 blend:
   wrapper:
     - rawLabel: Habano Oscuro-Oscuro

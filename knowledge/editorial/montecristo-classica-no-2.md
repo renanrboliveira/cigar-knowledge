@@ -7,8 +7,6 @@ handmade: true
 boxPressed: false
 experienceLevel: Experiente
 complexity: Complexa
-pairings: []
-tastingNotes: []
 evidence:
   - sourceId: habanos-com-en-the-habanos-brands-academia-montecristo-brand
     field: /summary

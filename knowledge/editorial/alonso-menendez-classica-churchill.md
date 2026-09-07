@@ -5,8 +5,6 @@ variantId: alonso-menendez-classica-churchill
 handmade: true
 experienceLevel: Intermediario
 complexity: Equilibrada
-pairings: []
-tastingNotes: []
 evidence:
   - sourceId: menendezamerino-com
     field: /summary

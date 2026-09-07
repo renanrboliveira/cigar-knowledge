@@ -7,8 +7,6 @@ handmade: true
 boxPressed: false
 experienceLevel: Intermediario
 complexity: Complexa
-pairings: []
-tastingNotes: []
 evidence:
   - sourceId: habanos-com-en-the-habanos-brands-academia-cohiba-brand
     field: /summary

@@ -7,8 +7,6 @@ handmade: true
 boxPressed: true
 experienceLevel: Experiente
 complexity: Intensa
-pairings: []
-tastingNotes: []
 evidence:
   - sourceId: myfathercigars-com-cigar-my-father-le-bijou-1922
     field: /summary

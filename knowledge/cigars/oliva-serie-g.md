@@ -4,6 +4,25 @@ id: oliva-serie-g
 brand: oliva
 line: oliva-serie-g
 name: Oliva Serie G
+evidence:
+  - sourceId: olivacigar-com-cigars-serie-g
+    field: /variants/0/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: olivacigar-com-cigars-serie-g
+    field: /variants/0/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: olivacigar-com-cigars-serie-g
+    field: /declaredProfile/strength
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
 blend:
   wrapper:
     - rawLabel: Cameroon

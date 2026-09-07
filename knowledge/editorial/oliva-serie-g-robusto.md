@@ -7,7 +7,6 @@ handmade: true
 boxPressed: false
 experienceLevel: Intermediario
 complexity: Equilibrada
-pairings: []
 tastingNotes:
   - Cedro
   - Cafe
@@ -17,6 +16,12 @@ evidence:
     relation: supports
     confidence: high
     claimType: manufacturer_claim
+    status: supported
+  - sourceId: olivacigar-com-cigars-serie-g
+    field: /tastingNotes
+    relation: supports
+    confidence: high
+    claimType: sensory_description
     status: supported
 ---
 

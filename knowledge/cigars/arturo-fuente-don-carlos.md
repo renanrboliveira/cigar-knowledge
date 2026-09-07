@@ -4,6 +4,19 @@ id: arturo-fuente-don-carlos
 brand: arturo-fuente
 line: arturo-fuente-don-carlos
 name: Arturo Fuente Don Carlos
+evidence:
+  - sourceId: arturofuente-com-download-af-catalog-en-pdf
+    field: /variants/0/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: arturofuente-com-download-af-catalog-en-pdf
+    field: /variants/0/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
 blend:
   wrapper:
     - rawLabel: Cameroon

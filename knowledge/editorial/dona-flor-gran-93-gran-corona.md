@@ -4,8 +4,6 @@ id: dona-flor-gran-93-gran-corona
 variantId: dona-flor-gran-93-gran-corona
 constructionType: Long filler
 handmade: true
-pairings: []
-tastingNotes: []
 evidence:
   - sourceId: menendezamerino-com-produtos
     field: /summary

@@ -4,6 +4,37 @@ id: jamm-cigar-medium-filler
 brand: jamm-cigar
 line: jamm-cigar-medium-filler
 name: JAMM Cigar Medium Filler
+evidence:
+  - sourceId: jammcigar-com-br
+    field: /variants/0/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/0/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /declaredProfile/strength
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/1/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/1/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
 release:
   productionStatus: unknown
 declaredProfile:

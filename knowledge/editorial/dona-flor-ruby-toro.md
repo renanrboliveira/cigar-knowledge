@@ -4,8 +4,6 @@ id: dona-flor-ruby-toro
 variantId: dona-flor-ruby-toro
 constructionType: Long filler
 handmade: true
-pairings: []
-tastingNotes: []
 evidence:
   - sourceId: menendezamerino-com-produtos
     field: /summary

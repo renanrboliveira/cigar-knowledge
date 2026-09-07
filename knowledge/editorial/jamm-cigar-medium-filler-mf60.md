@@ -6,8 +6,6 @@ constructionType: Medium filler
 handmade: true
 experienceLevel: Iniciante
 complexity: Direta
-pairings: []
-tastingNotes: []
 evidence:
   - sourceId: jammcigar-com-br
     field: /summary

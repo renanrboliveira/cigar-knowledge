@@ -7,8 +7,6 @@ handmade: true
 boxPressed: true
 experienceLevel: Experiente
 complexity: Complexa
-pairings: []
-tastingNotes: []
 evidence:
   - sourceId: padron-com-cigar-offering
     field: /summary

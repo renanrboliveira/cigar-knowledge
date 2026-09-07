@@ -28,6 +28,12 @@ evidence:
     confidence: high
     claimType: manufacturer_claim
     status: supported
+  - sourceId: olivacigar-com-cigars-serie-v-melanio
+    field: /tastingNotes
+    relation: supports
+    confidence: high
+    claimType: sensory_description
+    status: supported
 ---
 
 # oliva-serie-v-melanio-figurado — dossiê

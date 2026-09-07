@@ -7,8 +7,6 @@ handmade: true
 boxPressed: true
 experienceLevel: Experiente
 complexity: Complexa
-pairings: []
-tastingNotes: []
 evidence:
   - sourceId: olivacigar-com-cigars-serie-v-melanio
     field: /summary

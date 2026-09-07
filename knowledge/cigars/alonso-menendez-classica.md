@@ -4,6 +4,13 @@ id: alonso-menendez-classica
 brand: alonso-menendez
 line: alonso-menendez-classica
 name: Alonso Menendez Classica
+evidence:
+  - sourceId: menendezamerino-com
+    field: /declaredProfile/strength
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
 blend:
   wrapper: null
   binder: null

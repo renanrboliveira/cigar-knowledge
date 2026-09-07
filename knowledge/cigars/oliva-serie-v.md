@@ -4,6 +4,19 @@ id: oliva-serie-v
 brand: oliva
 line: oliva-serie-v
 name: Oliva Serie V
+evidence:
+  - sourceId: olivacigar-com-cigars-serie-v
+    field: /variants/0/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: olivacigar-com-cigars-serie-v
+    field: /variants/0/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
 blend:
   wrapper:
     - rawLabel: Habano Sun Grown equatoriana

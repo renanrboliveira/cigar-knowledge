@@ -7,7 +7,6 @@ handmade: true
 boxPressed: false
 experienceLevel: Experiente
 complexity: Complexa
-pairings: []
 tastingNotes:
   - Cafe
   - Chocolate amargo
@@ -18,6 +17,12 @@ evidence:
     relation: supports
     confidence: high
     claimType: manufacturer_claim
+    status: supported
+  - sourceId: olivacigar-com-cigars-serie-v
+    field: /tastingNotes
+    relation: supports
+    confidence: high
+    claimType: sensory_description
     status: supported
 ---
 

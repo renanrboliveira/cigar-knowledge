@@ -4,6 +4,49 @@ id: jamm-cigar-jamm-pressed
 brand: jamm-cigar
 line: jamm-cigar-jamm-pressed
 name: JAMM Cigar JAMM Pressed
+evidence:
+  - sourceId: jammcigar-com-br
+    field: /variants/0/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/0/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /declaredProfile/strength
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/1/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/1/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/2/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /variants/2/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
 blend:
   wrapper: null
   binder: null

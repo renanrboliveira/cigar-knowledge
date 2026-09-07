@@ -4,6 +4,25 @@ id: padron-damaso-series
 brand: padron
 line: padron-damaso-series
 name: Padron Damaso Series
+evidence:
+  - sourceId: padron-com-damaso-series
+    field: /variants/0/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: padron-com-damaso-series
+    field: /variants/0/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: padron-com-damaso-series
+    field: /declaredProfile/strength
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
 blend:
   wrapper:
     - rawLabel: Connecticut equatoriana

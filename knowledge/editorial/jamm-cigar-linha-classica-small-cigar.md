@@ -5,7 +5,6 @@ variantId: jamm-cigar-linha-classica-small-cigar
 handmade: true
 experienceLevel: Iniciante
 complexity: Direta
-pairings: []
 tastingNotes:
   - Adocicado
 evidence:
@@ -14,6 +13,12 @@ evidence:
     relation: supports
     confidence: high
     claimType: manufacturer_claim
+    status: supported
+  - sourceId: jammcigar-com-br
+    field: /tastingNotes
+    relation: supports
+    confidence: high
+    claimType: sensory_description
     status: supported
 ---
 

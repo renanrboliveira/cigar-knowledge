@@ -4,6 +4,19 @@ id: oliva-serie-o
 brand: oliva
 line: oliva-serie-o
 name: Oliva Serie O
+evidence:
+  - sourceId: olivacigar-com-cigars-serie-o
+    field: /variants/0/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: olivacigar-com-cigars-serie-o
+    field: /variants/0/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
 blend:
   wrapper:
     - rawLabel: Habano equatoriana

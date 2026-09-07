@@ -7,8 +7,6 @@ handmade: true
 boxPressed: false
 experienceLevel: Intermediario
 complexity: Complexa
-pairings: []
-tastingNotes: []
 evidence:
   - sourceId: arturofuente-com-download-af-catalog-en-pdf
     field: /summary

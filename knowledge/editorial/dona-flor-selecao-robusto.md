@@ -4,8 +4,6 @@ id: dona-flor-selecao-robusto
 variantId: dona-flor-selecao-robusto
 constructionType: Long filler
 handmade: true
-pairings: []
-tastingNotes: []
 evidence:
   - sourceId: menendezamerino-com-produtos
     field: /summary

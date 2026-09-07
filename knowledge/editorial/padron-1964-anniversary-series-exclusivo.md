@@ -7,8 +7,6 @@ handmade: true
 boxPressed: true
 experienceLevel: Intermediario
 complexity: Complexa
-pairings: []
-tastingNotes: []
 evidence:
   - sourceId: padron-com-padron-1964-anniversary-series
     field: /summary

@@ -4,8 +4,6 @@ id: dona-flor-rustic-corona
 variantId: dona-flor-rustic-corona
 constructionType: Short filler
 handmade: true
-pairings: []
-tastingNotes: []
 evidence:
   - sourceId: menendezamerino-com-produtos
     field: /summary

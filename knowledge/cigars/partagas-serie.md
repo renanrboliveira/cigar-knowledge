@@ -4,6 +4,13 @@ id: partagas-serie
 brand: partagas
 line: partagas-serie
 name: Partagas Serie
+evidence:
+  - sourceId: habanos-com-en-strengths
+    field: /declaredProfile/strength
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
 release:
   productionStatus: unknown
 declaredProfile:

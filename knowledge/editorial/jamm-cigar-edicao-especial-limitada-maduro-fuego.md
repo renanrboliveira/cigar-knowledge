@@ -6,8 +6,6 @@ constructionType: Long filler
 handmade: true
 experienceLevel: Experiente
 complexity: Intensa
-pairings: []
-tastingNotes: []
 evidence:
   - sourceId: jammcigar-com-br
     field: /summary

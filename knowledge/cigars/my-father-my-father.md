@@ -4,6 +4,37 @@ id: my-father-my-father
 brand: my-father
 line: my-father-my-father
 name: My Father My Father
+evidence:
+  - sourceId: myfathercigars-com-cigar-my-father
+    field: /variants/0/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: myfathercigars-com-cigar-my-father
+    field: /variants/0/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: myfathercigars-com-cigar-my-father
+    field: /declaredProfile/strength
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: myfathercigars-com-cigar-my-father
+    field: /variants/1/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: myfathercigars-com-cigar-my-father
+    field: /variants/1/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
 blend:
   wrapper:
     - rawLabel: Habano Rosado

@@ -7,8 +7,6 @@ handmade: true
 boxPressed: false
 experienceLevel: Intermediario
 complexity: Equilibrada
-pairings: []
-tastingNotes: []
 evidence:
   - sourceId: olivacigar-com-cigars-serie-o
     field: /summary

@@ -4,6 +4,19 @@ id: dona-flor-rustic
 brand: dona-flor
 line: dona-flor-rustic
 name: Dona Flor Rustic
+evidence:
+  - sourceId: menendezamerino-com-produtos
+    field: /variants/0/vitola/lengthMm
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
+  - sourceId: menendezamerino-com-produtos
+    field: /variants/0/vitola/ringGauge
+    relation: supports
+    confidence: high
+    claimType: manufacturer_claim
+    status: supported
 blend:
   wrapper:
     - rawLabel: Cubra

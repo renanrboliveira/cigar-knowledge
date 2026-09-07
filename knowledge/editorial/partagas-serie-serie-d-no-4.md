@@ -7,8 +7,6 @@ handmade: true
 boxPressed: false
 experienceLevel: Experiente
 complexity: Intensa
-pairings: []
-tastingNotes: []
 evidence:
   - sourceId: habanos-com-en-the-habanos-brands-academia-partagas-brand
     field: /summary

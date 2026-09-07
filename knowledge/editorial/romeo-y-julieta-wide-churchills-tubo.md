@@ -6,8 +6,6 @@ constructionType: Long filler
 handmade: true
 experienceLevel: Intermediario
 complexity: Equilibrada
-pairings: []
-tastingNotes: []
 evidence:
   - sourceId: habanos-com-en-the-habanos-brands-academia-romeo-y-julieta-brand
     field: /summary

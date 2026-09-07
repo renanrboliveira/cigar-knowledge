@@ -4,8 +4,6 @@ id: dona-flor-black-gordito
 variantId: dona-flor-black-gordito
 constructionType: Long filler
 handmade: true
-pairings: []
-tastingNotes: []
 evidence:
   - sourceId: menendezamerino-com-produtos
     field: /summary

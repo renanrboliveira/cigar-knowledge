@@ -7,8 +7,6 @@ handmade: true
 boxPressed: false
 experienceLevel: Experiente
 complexity: Intensa
-pairings: []
-tastingNotes: []
 evidence:
   - sourceId: myfathercigars-com-cigar-my-father
     field: /summary
