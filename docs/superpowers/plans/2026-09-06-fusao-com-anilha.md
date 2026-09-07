@@ -702,7 +702,7 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 **As três regras difíceis, que os testes existem para travar:**
 
 1. **Identidade.** `variantId` junta `brand-line-variant` com hífens, e insere a edição no meio **apenas quando ela não é a padrão**. Sem isso os 46 dossiês apontam para o lugar errado: o slug `robusto` aparece 8 vezes.
-2. **Içar o blend.** O Anilha guarda blend por variante; a KB guarda no charuto, com `blendOverride` por variante. Quando todas as variantes de uma edição compartilham o mesmo blend, ele sobe para `cigar.blend`. Quando divergem — um caso em 28 — a variante divergente recebe `blendOverride`, que a KB exige acompanhado de evidência.
+2. **Içar o blend.** O Anilha guarda blend por variante; a KB guarda no charuto, com `blendOverride` por variante. Quando todas as variantes de uma edição compartilham o mesmo blend, ele sobe para `cigar.blend`. Quando divergem — um caso em 28 — **nenhum** blend sobe para o charuto e **cada** variante declara o seu em `blendOverride`, que a KB exige acompanhado de evidência. Declarar o blend da maioria no nível do charuto afirmaria o que a fonte não diz. E uma variante divergente sem evidência de blend faz `mapCigar` lançar, em vez de emitir um override que `docs/architecture.md:29-32` proíbe.
 3. **Nada de campo inventado.** Coluna nula no dump vira propriedade ausente, exceto onde a KB exige o campo: `release.productionStatus` recebe `unknown`, que é um valor do enum e significa exatamente "não sei".
 
 - [ ] **Step 1: Write the dump fixture**
