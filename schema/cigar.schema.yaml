@@ -147,35 +147,41 @@ $defs:
     additionalProperties: false
     properties:
       wrapper:
-        type: array
-        minItems: 1
-        items:
-          allOf:
-            - $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/tobaccoComponent
-            - type: object
-              properties:
-                role:
-                  const: wrapper
+        anyOf:
+          - type: 'null'
+          - type: array
+            minItems: 1
+            items:
+              allOf:
+                - $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/tobaccoComponent
+                - type: object
+                  properties:
+                    role:
+                      const: wrapper
       binder:
-        type: array
-        minItems: 1
-        items:
-          allOf:
-            - $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/tobaccoComponent
-            - type: object
-              properties:
-                role:
-                  const: binder
+        anyOf:
+          - type: 'null'
+          - type: array
+            minItems: 1
+            items:
+              allOf:
+                - $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/tobaccoComponent
+                - type: object
+                  properties:
+                    role:
+                      const: binder
       filler:
-        type: array
-        minItems: 1
-        items:
-          allOf:
-            - $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/tobaccoComponent
-            - type: object
-              properties:
-                role:
-                  const: filler
+        anyOf:
+          - type: 'null'
+          - type: array
+            minItems: 1
+            items:
+              allOf:
+                - $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/tobaccoComponent
+                - type: object
+                  properties:
+                    role:
+                      const: filler
   blendOverride:
     type: object
     required:
