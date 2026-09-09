@@ -32,5 +32,5 @@ test('todo dossie aponta para uma variante que existe', async () => {
     const doc = await fm(`knowledge/editorial/${arquivo}`);
     assert.ok(variantes.has(doc.variantId), `${arquivo}: variante ${doc.variantId} nao existe`);
   }
-  assert.equal(variantes.size, 46);
+  assert.equal(variantes.size, 87);
 });
