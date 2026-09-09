@@ -2,6 +2,13 @@
 schemaVersion: 1
 id: avo
 name: AVO
+evidence:
+  - sourceId: us-davidoffgeneva-com-discover-avo
+    field: /story
+    relation: supports
+    confidence: medium
+    claimType: manufacturer_claim
+    status: supported
 ---
 
 # AVO
