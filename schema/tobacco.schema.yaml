@@ -1,0 +1,172 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://cigar-knowledge.local/schema/tobacco.schema.yaml
+type: object
+required:
+  - schemaVersion
+  - id
+  - identity
+additionalProperties: false
+properties:
+  schemaVersion:
+    $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/schemaVersion
+  id:
+    $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/slug
+  identity:
+    type: string
+    minLength: 1
+  origin:
+    anyOf:
+      - $ref: '#/$defs/origin'
+      - type: 'null'
+  genetics:
+    anyOf:
+      - $ref: '#/$defs/genetics'
+      - type: 'null'
+  aliases:
+    type: array
+    items:
+      type: string
+      minLength: 1
+  sources:
+    type: array
+    items:
+      $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/slug
+$defs:
+  origin:
+    type: object
+    additionalProperties: false
+    properties:
+      countryCode:
+        type:
+          - string
+          - 'null'
+      region:
+        type:
+          - string
+          - 'null'
+      subregion:
+        type:
+          - string
+          - 'null'
+      farm:
+        type:
+          - string
+          - 'null'
+  genetics:
+    type: object
+    additionalProperties: false
+    properties:
+      cultivar:
+        type:
+          - string
+          - 'null'
+      lineage:
+        type:
+          - string
+          - 'null'
+  evidenceRef:
+    type: object
+    required:
+      - sourceId
+      - field
+      - relation
+      - confidence
+      - claimType
+      - status
+    additionalProperties: false
+    properties:
+      sourceId:
+        $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/slug
+      field:
+        type: string
+        minLength: 1
+        pattern: ^/
+      relation:
+        type: string
+        enum:
+          - supports
+          - contradicts
+          - mentions
+      confidence:
+        type: string
+        enum:
+          - high
+          - medium
+          - low
+      claimType:
+        type: string
+        enum:
+          - fact
+          - manufacturer_claim
+          - sensory_description
+          - expert_consensus
+          - personal_observation
+          - hypothesis
+      status:
+        $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/evidenceStatus
+      rawLabel:
+        type: string
+      note:
+        type: string
+  tobaccoComponent:
+    type: object
+    required:
+      - rawLabel
+      - role
+    additionalProperties: false
+    properties:
+      tobaccoId:
+        allOf:
+          - anyOf:
+              - $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/slug
+              - type: 'null'
+          - not:
+              const: ligero
+      rawLabel:
+        type: string
+        minLength: 1
+      role:
+        type: string
+        enum:
+          - wrapper
+          - binder
+          - filler
+      origin:
+        anyOf:
+          - $ref: '#/$defs/origin'
+          - type: 'null'
+      genetics:
+        anyOf:
+          - $ref: '#/$defs/genetics'
+          - type: 'null'
+      cultivation:
+        type: object
+        additionalProperties: false
+        properties:
+          method:
+            type:
+              - string
+              - 'null'
+      processing:
+        type: array
+        minItems: 1
+        items:
+          type: string
+          minLength: 1
+      descriptor:
+        type:
+          - string
+          - 'null'
+      priming:
+        type:
+          - string
+          - 'null'
+      crop:
+        type:
+          - string
+          - 'null'
+      evidence:
+        type: array
+        minItems: 1
+        items:
+          $ref: '#/$defs/evidenceRef'

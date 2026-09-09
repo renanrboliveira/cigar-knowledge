@@ -1,0 +1,17 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://cigar-knowledge.local/schema/common.schema.yaml
+$defs:
+  schemaVersion:
+    type: integer
+    const: 1
+  slug:
+    type: string
+    pattern: ^[a-z0-9]+(?:-[a-z0-9]+)*$
+  evidenceStatus:
+    type: string
+    enum:
+      - confirmed
+      - supported
+      - disputed
+      - unverified
+      - unknown

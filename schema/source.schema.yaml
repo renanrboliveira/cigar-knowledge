@@ -1,0 +1,41 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://cigar-knowledge.local/schema/source.schema.yaml
+type: object
+required:
+  - schemaVersion
+  - id
+  - type
+  - title
+additionalProperties: false
+properties:
+  schemaVersion:
+    $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/schemaVersion
+  id:
+    $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/slug
+  type:
+    type: string
+    enum:
+      - manufacturer
+      - official_distributor
+      - government_or_regulatory
+      - book
+      - academic
+      - specialized_media
+      - retailer
+      - community
+      - user
+  title:
+    type: string
+    minLength: 1
+  url:
+    type: string
+    format: uri
+  publisher:
+    type: string
+    minLength: 1
+  publishedAt:
+    type: string
+    format: date
+  accessedAt:
+    type: string
+    format: date

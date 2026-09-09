@@ -1,0 +1,225 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://cigar-knowledge.local/schema/cigar.schema.yaml
+type: object
+required:
+  - schemaVersion
+  - id
+  - brand
+  - line
+  - name
+  - variants
+additionalProperties: false
+properties:
+  schemaVersion:
+    $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/schemaVersion
+  id:
+    $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/slug
+  brand:
+    $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/slug
+  line:
+    $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/slug
+  name:
+    type: string
+    minLength: 1
+  evidence:
+    type: array
+    minItems: 1
+    items:
+      $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/evidenceRef
+  blend:
+    anyOf:
+      - $ref: '#/$defs/blend'
+      - type: 'null'
+  release:
+    $ref: '#/$defs/release'
+  availability:
+    $ref: '#/$defs/availability'
+  declaredProfile:
+    $ref: '#/$defs/declaredProfile'
+  variants:
+    type: array
+    minItems: 1
+    items:
+      $ref: '#/$defs/cigarVariant'
+$defs:
+  release:
+    type: object
+    required:
+      - productionStatus
+    additionalProperties: false
+    properties:
+      releaseYear:
+        type:
+          - integer
+          - 'null'
+      limitedEdition:
+        type: boolean
+      commemorative:
+        type: boolean
+      editionName:
+        type:
+          - string
+          - 'null'
+      anniversary:
+        type:
+          - integer
+          - 'null'
+      productionStatus:
+        type: string
+        enum:
+          - current
+          - discontinued
+          - seasonal
+          - unknown
+      evidence:
+        type: array
+        minItems: 1
+        items:
+          $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/evidenceRef
+  availability:
+    type: object
+    required:
+      - status
+    additionalProperties: false
+    properties:
+      status:
+        type: string
+        minLength: 1
+      evidence:
+        type: array
+        minItems: 1
+        items:
+          $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/evidenceRef
+  declaredProfile:
+    type: object
+    additionalProperties: false
+    properties:
+      strength:
+        anyOf:
+          - type: integer
+            minimum: 1
+            maximum: 5
+          - type: 'null'
+      body:
+        anyOf:
+          - type: integer
+            minimum: 1
+            maximum: 5
+          - type: 'null'
+      flavorIntensity:
+        anyOf:
+          - type: integer
+            minimum: 1
+            maximum: 5
+          - type: 'null'
+      manufacturerNotes:
+        type:
+          - string
+          - 'null'
+      evidence:
+        type: array
+        minItems: 1
+        items:
+          $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/evidenceRef
+  cigarVariant:
+    type: object
+    required:
+      - id
+      - name
+      - vitola
+    additionalProperties: false
+    properties:
+      id:
+        $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/slug
+      name:
+        type: string
+        minLength: 1
+      vitola:
+        $ref: '#/$defs/vitola'
+      blendOverride:
+        $ref: '#/$defs/blendOverride'
+  blend:
+    type: object
+    required:
+      - wrapper
+      - binder
+      - filler
+    additionalProperties: false
+    properties:
+      wrapper:
+        anyOf:
+          - type: 'null'
+          - type: array
+            minItems: 1
+            items:
+              allOf:
+                - $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/tobaccoComponent
+                - type: object
+                  properties:
+                    role:
+                      const: wrapper
+      binder:
+        anyOf:
+          - type: 'null'
+          - type: array
+            minItems: 1
+            items:
+              allOf:
+                - $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/tobaccoComponent
+                - type: object
+                  properties:
+                    role:
+                      const: binder
+      filler:
+        anyOf:
+          - type: 'null'
+          - type: array
+            minItems: 1
+            items:
+              allOf:
+                - $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/tobaccoComponent
+                - type: object
+                  properties:
+                    role:
+                      const: filler
+  blendOverride:
+    type: object
+    required:
+      - blend
+      - evidence
+    additionalProperties: false
+    properties:
+      blend:
+        $ref: '#/$defs/blend'
+      evidence:
+        type: array
+        minItems: 1
+        items:
+          $ref: https://cigar-knowledge.local/schema/tobacco.schema.yaml#/$defs/evidenceRef
+  vitola:
+    type: object
+    required:
+      - commercialName
+    additionalProperties: false
+    properties:
+      commercialName:
+        type: string
+        minLength: 1
+      factoryName:
+        type:
+          - string
+          - 'null'
+      shape:
+        type:
+          - string
+          - 'null'
+      lengthMm:
+        anyOf:
+          - type: number
+            exclusiveMinimum: 0
+          - type: 'null'
+      ringGauge:
+        anyOf:
+          - type: integer
+            exclusiveMinimum: 0
+          - type: 'null'

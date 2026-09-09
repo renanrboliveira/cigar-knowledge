@@ -1,0 +1,298 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://cigar-knowledge.local/schema/smoke-session.schema.yaml
+type: object
+required:
+  - schemaVersion
+  - id
+  - cigarVariantId
+  - mode
+  - status
+additionalProperties: false
+properties:
+  schemaVersion:
+    $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/schemaVersion
+  id:
+    $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/slug
+  cigarVariantId:
+    $ref: https://cigar-knowledge.local/schema/common.schema.yaml#/$defs/slug
+  mode:
+    type: string
+    enum:
+      - quick
+      - guided
+  status:
+    type: string
+    enum:
+      - planned
+      - in_progress
+      - completed
+      - abandoned
+  startedAt:
+    type:
+      - string
+      - 'null'
+  endedAt:
+    type:
+      - string
+      - 'null'
+  durationMinutes:
+    type:
+      - number
+      - 'null'
+    minimum: 0
+  context:
+    $ref: '#/$defs/context'
+  preparation:
+    $ref: '#/$defs/preparation'
+  preLight:
+    $ref: '#/$defs/preLight'
+  nicotineImpact:
+    $ref: '#/$defs/nicotineImpact'
+  stages:
+    type: array
+    items:
+      $ref: '#/$defs/stage'
+  finalEvaluation:
+    $ref: '#/$defs/finalEvaluation'
+allOf:
+  - if:
+      properties:
+        status:
+          const: completed
+      required:
+        - status
+    then:
+      properties:
+        stages:
+          type: array
+          minItems: 1
+      required:
+        - stages
+$defs:
+  context:
+    type: object
+    additionalProperties: false
+    properties:
+      location:
+        type: string
+      occasion:
+        type: string
+      companions:
+        type: string
+      notes:
+        type: string
+  preparation:
+    type: object
+    additionalProperties: false
+    properties:
+      cutter:
+        type: string
+      cut:
+        type: string
+      lightingMethod:
+        type: string
+      restedBeforeLighting:
+        type: boolean
+      notes:
+        type: string
+  preLight:
+    type: object
+    additionalProperties: false
+    properties:
+      appearance:
+        type: string
+      aroma:
+        type: string
+      coldDraw:
+        type: string
+      notes:
+        type: string
+  stage:
+    type: object
+    required:
+      - kind
+    additionalProperties: false
+    properties:
+      kind:
+        anyOf:
+          - enum:
+              - first_third
+              - second_third
+              - final_third
+          - type: string
+            pattern: ^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$
+      sensory:
+        $ref: '#/$defs/sensorySnapshot'
+      retrohale:
+        $ref: '#/$defs/retrohale'
+      construction:
+        $ref: '#/$defs/construction'
+  sensorySnapshot:
+    type: object
+    additionalProperties: false
+    properties:
+      strength:
+        anyOf:
+          - type: integer
+            minimum: 1
+            maximum: 5
+          - type: 'null'
+      body:
+        anyOf:
+          - type: integer
+            minimum: 1
+            maximum: 5
+          - type: 'null'
+      flavorIntensity:
+        anyOf:
+          - type: integer
+            minimum: 1
+            maximum: 5
+          - type: 'null'
+      texture:
+        type:
+          - string
+          - 'null'
+      flavors:
+        type: array
+        items:
+          $ref: '#/$defs/flavorObservation'
+      notes:
+        type: string
+  flavorObservation:
+    type: object
+    required:
+      - family
+    additionalProperties: false
+    properties:
+      family:
+        type: string
+        enum:
+          - woody
+          - earthy
+          - roasted
+          - sweet
+          - spicy
+          - nutty
+          - creamy
+          - fruity
+          - vegetal
+          - floral
+          - leather
+          - mineral
+      descriptor:
+        type: string
+      intensity:
+        type: integer
+        minimum: 1
+        maximum: 5
+      discovery:
+        type: string
+        enum:
+          - spontaneous
+          - prompted
+  retrohale:
+    type: object
+    additionalProperties: false
+    properties:
+      flavors:
+        type: array
+        items:
+          $ref: '#/$defs/flavorObservation'
+      notes:
+        type: string
+  construction:
+    type: object
+    additionalProperties: false
+    properties:
+      draw:
+        type: string
+        enum:
+          - very_tight
+          - tight
+          - ideal
+          - open
+          - very_open
+      burnQuality:
+        type:
+          - string
+          - 'null'
+      events:
+        type: array
+        items:
+          type: string
+          enum:
+            - touch_up
+            - relight
+            - canoeing
+            - tunneling
+      smokeOutput:
+        type:
+          - string
+          - 'null'
+      perceivedHeat:
+        type:
+          - string
+          - 'null'
+  nicotineImpact:
+    type: string
+    enum:
+      - none
+      - light
+      - noticeable
+      - strong
+      - excessive
+  finalEvaluation:
+    type: object
+    additionalProperties: false
+    properties:
+      enjoyment:
+        $ref: '#/$defs/nullableRating'
+      balance:
+        $ref: '#/$defs/nullableRating'
+      complexity:
+        $ref: '#/$defs/nullableRating'
+      evolution:
+        $ref: '#/$defs/nullableRating'
+      construction:
+        $ref: '#/$defs/nullableRating'
+      bestStage:
+        type:
+          - string
+          - 'null'
+      wouldSmokeAgain:
+        type:
+          - boolean
+          - 'null'
+      wouldBuyAgain:
+        type:
+          - boolean
+          - 'null'
+      dominantFlavorFamilies:
+        type: array
+        uniqueItems: true
+        items:
+          type: string
+          enum:
+            - woody
+            - earthy
+            - roasted
+            - sweet
+            - spicy
+            - nutty
+            - creamy
+            - fruity
+            - vegetal
+            - floral
+            - leather
+            - mineral
+      overallImpression:
+        type:
+          - string
+          - 'null'
+  nullableRating:
+    type:
+      - integer
+      - 'null'
+    minimum: 1
+    maximum: 5
