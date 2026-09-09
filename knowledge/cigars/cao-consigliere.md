@@ -26,25 +26,7 @@ blend:
           claimType: manufacturer_claim
           status: confirmed
   filler:
-    - rawLabel: Colombian
-      role: filler
-      evidence:
-        - sourceId: caocigars-com-cigars-consigliere
-          field: /blend/filler
-          relation: supports
-          confidence: high
-          claimType: manufacturer_claim
-          status: confirmed
-    - rawLabel: Dominican
-      role: filler
-      evidence:
-        - sourceId: caocigars-com-cigars-consigliere
-          field: /blend/filler
-          relation: supports
-          confidence: high
-          claimType: manufacturer_claim
-          status: confirmed
-    - rawLabel: Nicaraguan
+    - rawLabel: Colombian, Dominican, Nicaraguan
       role: filler
       evidence:
         - sourceId: caocigars-com-cigars-consigliere

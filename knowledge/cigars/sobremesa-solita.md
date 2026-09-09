@@ -16,16 +16,7 @@ blend:
           claimType: manufacturer_claim
           status: supported
   binder:
-    - rawLabel: Nicaraguan
-      role: binder
-      evidence:
-        - sourceId: dunbartoncigars-com-marca-sobremesa
-          field: /blend/binder
-          relation: supports
-          confidence: high
-          claimType: manufacturer_claim
-          status: supported
-    - rawLabel: Pennsylvanian
+    - rawLabel: Nicaraguan, Pennsylvanian
       role: binder
       evidence:
         - sourceId: dunbartoncigars-com-marca-sobremesa
@@ -35,16 +26,7 @@ blend:
           claimType: manufacturer_claim
           status: supported
   filler:
-    - rawLabel: Nicaraguan
-      role: filler
-      evidence:
-        - sourceId: dunbartoncigars-com-marca-sobremesa
-          field: /blend/filler
-          relation: supports
-          confidence: high
-          claimType: manufacturer_claim
-          status: supported
-    - rawLabel: Pennsylvanian
+    - rawLabel: Nicaraguan, Pennsylvanian
       role: filler
       evidence:
         - sourceId: dunbartoncigars-com-marca-sobremesa

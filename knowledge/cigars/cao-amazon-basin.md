@@ -26,25 +26,7 @@ blend:
           claimType: manufacturer_claim
           status: confirmed
   filler:
-    - rawLabel: Brazilian Bragança
-      role: filler
-      evidence:
-        - sourceId: caocigars-com-cigars-amazon-basin
-          field: /blend/filler
-          relation: supports
-          confidence: high
-          claimType: manufacturer_claim
-          status: confirmed
-    - rawLabel: Colombian
-      role: filler
-      evidence:
-        - sourceId: caocigars-com-cigars-amazon-basin
-          field: /blend/filler
-          relation: supports
-          confidence: high
-          claimType: manufacturer_claim
-          status: confirmed
-    - rawLabel: Dominican
+    - rawLabel: Brazilian Bragança, Colombian, Dominican
       role: filler
       evidence:
         - sourceId: caocigars-com-cigars-amazon-basin
